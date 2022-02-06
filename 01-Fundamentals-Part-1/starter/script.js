@@ -12,7 +12,7 @@ console.log(firstName);
 console.log(firstName);
 console.log(firstName);
 
-*/
+
 
 let javascriptIsFun = true;
 console.log(javascriptIsFun);
@@ -32,3 +32,20 @@ console.log(typeof year);
 
 console.log(typeof null);
 
+*/
+// Block Scoped
+let age = 30;
+age = 31;
+
+const birthDate = "1984/09/27";
+// birthDate = "1999/01/01";
+
+// console.log(birthDate);
+
+// Function Scoped
+var job = 'programmer';
+job = 'teacher';
+
+// Not in current scope, is created on global object
+lastName = "Guenther";
+console.log(lastName);
