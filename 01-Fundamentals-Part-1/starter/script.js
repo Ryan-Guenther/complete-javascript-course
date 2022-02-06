@@ -50,7 +50,7 @@ job = 'teacher';
 lastName = "Guenther";
 console.log(lastName);
 
-*/
+
 const year = 2022;
 
 const ageRyan = year - 1984;
@@ -78,3 +78,20 @@ console.log(x);
 console.log(ageRyan > ageLindsey); // >, <, >=, <=
 console.log(ageLindsey >= 18);
 
+*/
+
+//Operator Precedence
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence
+const year = 2022;
+
+const ageRyan = year - 1984;
+const ageLindsey = year - 1988;
+
+console.log(year - 1991 > year - 2018);
+
+let x, y;
+x = y = 25 - 10 - 5;
+console.log(x, y);
+
+const averageAge = (ageRyan + ageLindsey) / 2;
+console.log(ageRyan, ageLindsey, averageAge);
