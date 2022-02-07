@@ -360,6 +360,8 @@ Test data:
 § Data Bonus 2: Dolphins score 97, 112 and 101. Koalas score 109, 95 and 106
 */
 
+/*
+
 //Data 1
 // const dolphinScore1 = 96;
 // const dolphinScore2 = 108;
@@ -401,4 +403,48 @@ else if (averageDolphins > 100 && averageDolphins === averageKoalas) {
 }
 else {
   console.log('No teams scored enough points to get a trophy!');
+}
+
+*/
+
+const day = prompt('Specify the day of the week (monday, tuesday, wednesday...)');
+
+switch (day) {
+  case 'monday':
+    // all lines before the break are executed
+    console.log('Plan course structure');
+    console.log('Go to coding meetup');
+    break;
+  case 'tuesday':
+    console.log('Prepare theory videos');
+    break;
+  case 'wednesday':
+  // no break so it keeps going into next one
+  case 'thursday':
+    console.log('Write code examplles');
+    break;
+  case 'friday':
+    console.log('Record videos');
+    break;
+  case 'saturday':
+  case 'sunday':
+    console.log('Enjoy the weekend :D');
+    break;
+  default:
+    console.log('Not a valid day!');
+}
+
+if (day === 'monday') {
+  console.log('Plan course structure');
+  console.log('Go to coding meetup');
+} else if (day === 'tuesday') {
+  console.log('Prepare theory videos');
+} else if (day === 'wednesday' || day === 'thursday') {
+  console.log('Write code examplles');
+} else if (day === 'friday') {
+  console.log('Record videos');
+} else if (day === 'saturday' || day === 'sunday') {
+  console.log('Enjoy the weekend :D');
+} else {
+  console.log('Not a valid day!');
 }
