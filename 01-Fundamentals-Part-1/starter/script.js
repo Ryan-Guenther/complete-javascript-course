@@ -452,6 +452,8 @@ if (day === 'monday') {
 
 */
 
+/*
+
 //Expressions express values
 3 + 4
 1971
@@ -465,5 +467,24 @@ if (23 > 10) { const str = '23 is bigger'; }
 //For instance in here we can have an expression within the ${} but you couldn't put an if statement in there as that is not an expression
 console.log(`I'm ${2037 - 1991} years old.`);
 
+*/
 
+const age = 23;
+//Ternary operator condition ? if true : else block
+// age >= 18 ? console.log('I like to drink scotch') : console.log('I like to drink water');
 
+const drink = age >= 18 ? 'scotch' : 'water'
+console.log(`I like to drink ${drink}.`);
+
+//Above lines are the same as this
+let drink2
+if (age >= 18) {
+  drink2 = 'scotch'
+} else {
+  drink2 = 'water'
+}
+
+console.log(`I like to drink ${drink2}.`);
+
+//ternary operator is able to be used in template literal because it is an expression
+console.log(`I like to drink ${age >= 18 ? 'scotch' : 'water'}.`);
