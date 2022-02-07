@@ -299,3 +299,6 @@ if (favoriteNumber && favoriteNumber === 42) {
 } else {
   console.log('What were you thinking?');
 }
+
+// also has loose != should use strict !==
+if (favoriteNumber !== 23) console.log('Why not 23');
