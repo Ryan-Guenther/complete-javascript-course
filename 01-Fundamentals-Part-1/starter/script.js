@@ -231,6 +231,8 @@ else {
 
 */
 
+/*
+
 // type conversion
 const inputYear = "1991";
 console.log(Number(inputYear));
@@ -246,3 +248,32 @@ console.log('I am ' + 23 + ' years old');
 console.log('23' - '10' - 3);
 console.log('23' * '2');
 console.log('23' / '2');
+
+*/
+
+// 5 falsy values 0, '', undefined, null, NaN
+console.log(Boolean(0));
+console.log(Boolean(undefined));
+console.log(Boolean(NaN));
+console.log(Boolean('Ryan'));
+console.log(Boolean({}));
+console.log(Boolean(''));
+
+const money = 0;
+
+// automatic type coercion to a boolean in an if statement
+if (money) {
+  console.log("Don't spend it all)");
+}
+else {
+  console.log("You should get a job.");
+}
+
+// This can run into a bug if height is 0 since height has a value but 0 is falsy
+let height = 0;
+if (height) {
+  console.log('YAY! Height is defined!');
+}
+else {
+  console.log('Height is undefined!');
+}
