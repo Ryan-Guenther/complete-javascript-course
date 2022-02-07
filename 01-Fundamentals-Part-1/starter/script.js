@@ -148,6 +148,9 @@ console.log("Mark has a higher BMI: ", markHigherBMI);
 
 */
 
+
+/*
+
 const firstName = 'Ryan';
 const job = 'Developer';
 const birthYear = 1984;
@@ -166,3 +169,26 @@ lines');
 console.log(`String with
 multiple
 lines!`);
+
+*/
+
+const age = 15;
+
+if (age >= 18) {
+  console.log('Sarah can start driving license.');
+}
+else {
+  const yearsLeft = 18 - age;
+  console.log(`Sarah needs to wait another ${yearsLeft} years to get her drivers license!`);
+}
+
+const birthYear = 1991;
+let century;
+if (birthYear <= 2000) {
+  century = 20;
+}
+else {
+  century = 21;
+}
+
+console.log(century);
