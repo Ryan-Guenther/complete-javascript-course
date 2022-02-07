@@ -251,6 +251,7 @@ console.log('23' / '2');
 
 */
 
+/*
 // 5 falsy values 0, '', undefined, null, NaN
 console.log(Boolean(0));
 console.log(Boolean(undefined));
@@ -276,4 +277,25 @@ if (height) {
 }
 else {
   console.log('Height is undefined!');
+}
+
+*/
+
+const age = 18;
+
+// === is strict equality does not do type coercion '18' is not the same as 18
+// == does type coercion '18' is the same as 18
+if (age === 18) console.log('You are now an adult!');
+
+if (!(age === '18')) console.log('These are not equal (strict)');
+if (age == '18') console.log('These are now equal (loose)');
+
+let favoriteNumber = Number(prompt("What's your favorite number?"));
+
+if (favoriteNumber && favoriteNumber === 42) {
+  console.log("42 is an amazing number.");
+} else if (favoriteNumber === 7) {
+  console.log('I guess 7 is cool too!');
+} else {
+  console.log('What were you thinking?');
 }
