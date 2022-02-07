@@ -116,6 +116,8 @@ m tall.
 § Data 2: Marks weights 95 kg and is 1.88 m tall. John weights 85 kg and is 1.76 
 m tall.
 */
+
+/*
 let markHeight, markMass, johnHeight, johnMass, markBMI, johnBMI, markHigherBMI;
 
 markHeight = 1.69;
@@ -143,3 +145,24 @@ markHigherBMI = markBMI > johnBMI;
 console.log("Mark's BMI is: ", markBMI);
 console.log("John's BMI is: ", johnBMI);
 console.log("Mark has a higher BMI: ", markHigherBMI);
+
+*/
+
+const firstName = 'Ryan';
+const job = 'Developer';
+const birthYear = 1984;
+const currentYear = 2022;
+
+// Template Strings like this were added in ES6, need to use backticks
+const ryan = `I'm ${firstName}, a ${currentYear - birthYear} year old ${job}!`;
+console.log(ryan);
+
+// Multi line without template literal
+console.log('String with \n\
+multiple \n\
+lines');
+
+// Template string with multi line using backticks
+console.log(`String with
+multiple
+lines!`);
