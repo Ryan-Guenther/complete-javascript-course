@@ -20,6 +20,8 @@ if (hasDriversLicense) {
 
 */
 
+/*
+
 //function definiton
 //does not need to accept parameters or return parameters but could do non, either or both
 function logger() {
@@ -45,3 +47,23 @@ console.log(orangeJuice);
 
 const mixedJuice = fruitProcessor(2, 2)
 console.log(mixedJuice);
+
+*/
+
+// generic function declaration
+// this can be called before this declaration
+function calcAge1(birthYear) {
+  return 2037 - birthYear;
+}
+
+const age1 = calcAge1(1991);
+
+// function expression, this works because a function is treated as a value so you can store it in a variable
+// expressions can't be accessed until they are initialzied
+const calcAge2 = function (birthYear) {
+  return 2037 - birthYear;
+}
+
+const age2 = calcAge2(1991)
+
+console.log(age1, age2);
