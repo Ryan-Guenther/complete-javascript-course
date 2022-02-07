@@ -281,6 +281,7 @@ else {
 
 */
 
+/*
 const age = 18;
 
 // === is strict equality does not do type coercion '18' is not the same as 18
@@ -302,3 +303,33 @@ if (favoriteNumber && favoriteNumber === 42) {
 
 // also has loose != should use strict !==
 if (favoriteNumber !== 23) console.log('Why not 23');
+
+*/
+
+//Boolean Logic
+//AND OR & Not(!) Operators
+
+//Logical Operators
+
+const hasDriversLicense = true;
+const hasGoodVision = true;
+
+console.log(hasDriversLicense && hasGoodVision);
+console.log(hasDriversLicense || hasGoodVision);
+console.log(!hasDriversLicense);
+
+// if (hasDriversLicense && hasGoodVision) {
+//   console.log('Sarah is able to drive!');
+// } else {
+//   console.log('Someone else should drive!');
+// }
+
+const isTired = true;
+
+console.log(hasDriversLicense && hasGoodVision && isTired);
+
+if (hasDriversLicense && hasGoodVision & !isTired) {
+  console.log('Sarah is able to drive!');
+} else {
+  console.log('Someone else should drive!');
+}
