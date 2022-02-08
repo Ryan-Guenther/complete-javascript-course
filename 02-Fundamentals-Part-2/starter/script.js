@@ -325,6 +325,8 @@ GOOD LUCK
 
 */
 
+/*
+
 const calcTip = function (billAmount) {
   let tipAmount;
 
@@ -361,3 +363,24 @@ total.push(bills[index] + tips[index]);
 console.log(bills);
 console.log(tips);
 console.log(total);
+
+*/
+
+const ryanArray = [
+  'Ryan',
+  'Guenther',
+  2022 - 1984,
+  'Developer',
+  ['Donald', 'Robyn', 'Rob']
+];
+
+const ryan = {
+  firstName: 'Ryan',
+  lastName: 'Guenther',
+  age: 2022 - 1984,
+  job: 'Developer',
+  friends: ['Donald', 'Robyn', 'Rob']
+}
+
+console.log(ryanArray);
+console.log(ryan);
