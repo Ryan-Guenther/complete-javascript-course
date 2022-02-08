@@ -50,6 +50,8 @@ console.log(mixedJuice);
 
 */
 
+/*
+
 // generic function declaration
 // this can be called before this declaration
 function calcAge1(birthYear) {
@@ -67,3 +69,25 @@ const calcAge2 = function (birthYear) {
 const age2 = calcAge2(1991)
 
 console.log(age1, age2);
+
+*/
+
+// Arrow Functions
+const calcAge2 = function (birthYear) {
+  return 2037 - birthYear;
+}
+
+const calcAge3 = birthYear => 2037 - birthYear;
+
+const age3 = calcAge3(1991);
+console.log(age3);
+
+const yearsUntilRetirement = (birthYear, firstName) => {
+  const age = 2022 - birthYear;
+  const retirementYears = 65 - age;
+  return `${firstName} retires in ${retirementYears} years!`;
+}
+
+console.log(yearsUntilRetirement(1984, 'Ryan'));
+console.log(yearsUntilRetirement(1988, 'Lindsey'));
+
