@@ -196,6 +196,8 @@ checkWinner(calcAverage(85, 54, 41), calcAverage(23, 34, 27));
 
 */
 
+/*
+
 //Arrays
 
 const friend1 = 'Donald';
@@ -248,3 +250,41 @@ console.log(age1, age2, age3);
 const ages = [calcAge(years[0]), calcAge(years[1]), calcAge(years[years.length - 1])];
 
 console.log(ages);
+
+*/
+
+// Basic Array Operations (Methods)
+
+const friends = ['Donald', 'Robyn', 'Rob'];
+// Adds an element to an array -- returns length of new array
+let newLength = friends.push('Calvin');
+console.log(newLength);
+console.log(friends);
+
+// Adds new element to start of the array
+newLength = friends.unshift('Lindsey');
+console.log(newLength);
+console.log(friends);
+
+// Remove the Last Element of the Array and Returns the Removed Element
+let popped = friends.pop();
+console.log(popped);
+popped = friends.pop();
+console.log(popped);
+console.log(friends);
+
+// Remove the first eleemnt
+friends.shift();
+console.log(friends);
+
+// Find the index of the record -1 if not exists
+console.log(friends.indexOf('Robyn'));
+console.log(friends.indexOf('Matt'));
+
+// Search for an element in an array - Strict Equality
+console.log(friends.includes('Robyn'));
+console.log(friends.includes('Matt'));
+friends.push(23);
+console.log(friends.includes('23')); // False
+console.log(friends.includes(23)); // True
+
