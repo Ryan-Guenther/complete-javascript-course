@@ -141,13 +141,13 @@ console.log(yearsUntilRetirement(1946, 'John'));
 
 Coding Challenge #1
 
-Back to the two gymnastics teams, the Dolphins and the Koalas! There is a new 
+Back to the two gymnastics teams, the Dolphins and the Koalas! There is a new
 gymnastics discipline, which works differently.
 
-Each team competes 3 times, and then the average of the 3 scores is calculated (so 
+Each team competes 3 times, and then the average of the 3 scores is calculated (so
 one average score per team).
 
-A team only wins if it has at least double the average score of the other team. 
+A team only wins if it has at least double the average score of the other team.
 Otherwise, no team wins!
 
 Your tasks:
@@ -155,12 +155,12 @@ Your tasks:
 
 2. Use the function to calculate the average for both teams
 
-3. Create a function 'checkWinner' that takes the average score of each team 
-as parameters ('avgDolhins' and 'avgKoalas'), and then logs the winner 
-to the console, together with the victory points, according to the rule above. 
+3. Create a function 'checkWinner' that takes the average score of each team
+as parameters ('avgDolhins' and 'avgKoalas'), and then logs the winner
+to the console, together with the victory points, according to the rule above.
 Example: "Koalas win (30 vs. 13)"
 
-4. Use the 'checkWinner' function to determine the winner for both Data 1 and 
+4. Use the 'checkWinner' function to determine the winner for both Data 1 and
 Data 2
 
 5. Ignore draws this time
@@ -171,12 +171,14 @@ Test data:
 Hints:
 § To calculate average of 3 values, add them all together and divide by 3
 
-§ To check if number A is at least double number B, check for A >= 2 * B. 
+§ To check if number A is at least double number B, check for A >= 2 * B.
 Apply this to the team's average scores �
 
 GOOD LUCK
 
 */
+
+/*
 
 const calcAverage = (score1, score2, score3) => (score1 + score2 + score3) / 3
 
@@ -191,3 +193,58 @@ const checkWinner = function (avgDolphins, avgKoalas) {
 
 checkWinner(calcAverage(44, 23, 71), calcAverage(65, 54, 49));
 checkWinner(calcAverage(85, 54, 41), calcAverage(23, 34, 27));
+
+*/
+
+//Arrays
+
+const friend1 = 'Donald';
+const friend2 = 'Robyn';
+const friend3 = 'Rob';
+
+// Arrays defined with [] with comma separated values // literal syntax
+const friends = ['Donald', 'Robyn', 'Rob'];
+
+// can also be created using the array function, have to specify new keyword when doing this
+const y = new Array(1991, 1984, 2008, 2020);
+
+console.log(friends[0]);
+console.log(friends[2]);
+
+// can access length from property, need to ensure to subtract 1 since arrays are 0 based
+console.log(friends.length);
+console.log(friends[friends.length - 1]);
+
+// arrays can be mutated they are not primitive values (string, number)
+friends[2] = 'Calvin';
+console.log(friends);
+
+// can't reassign a const array
+//friends = ['Bob', 'Alice'];
+
+// arrays can hold different types
+const firstName = 'Ryan';
+const ryan = [firstName, 'Guenther', 2022 - 1984, 'Developer', friends]
+
+console.log(ryan);
+
+// Exercise
+
+const calcAge = function (birthYear) {
+  return 2022 - birthYear;
+}
+
+const years = [1990, 1967, 2002, 2010, 2018];
+
+// can't do this will return NaN
+//console.log(calcAge(years));
+
+const age1 = calcAge(years[0]);
+const age2 = calcAge(years[2]);
+const age3 = calcAge(years[years.length - 1]);
+
+console.log(age1, age2, age3);
+
+const ages = [calcAge(years[0]), calcAge(years[1]), calcAge(years[years.length - 1])];
+
+console.log(ages);
