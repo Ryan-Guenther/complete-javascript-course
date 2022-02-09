@@ -366,6 +366,10 @@ console.log(total);
 
 */
 
+/*
+
+// Introduction to Objects
+
 const ryanArray = [
   'Ryan',
   'Guenther',
@@ -384,3 +388,42 @@ const ryan = {
 
 console.log(ryanArray);
 console.log(ryan);
+*/
+
+// Dot vs Bracket Notation
+
+const ryan = {
+  firstName: 'Ryan',
+  lastName: 'Guenther',
+  age: 2022 - 1984,
+  job: 'Developer',
+  friends: ['Donald', 'Robyn', 'Rob']
+}
+
+// Dot notation to get property from an object
+console.log(ryan.lastName);
+
+// Bracket notation to get it - allows you to use any expression to fetch a property value
+console.log(ryan['lastName']);
+
+const nameKey = 'Name';
+console.log(ryan['first' + nameKey]);
+console.log(ryan['last' + nameKey]);
+
+const interestedIn = prompt('What do you want to know about Jonas?  Choose between firstName, lastName, age, job, and friends');
+
+// if you access what isn't a property it will return undefined
+console.log(interestedIn);
+if (ryan[interestedIn]) {
+  console.log(ryan[interestedIn]);
+}
+else {
+  console.log('Invalid data requested.');
+}
+
+ryan.location = 'Spruce Grove';
+ryan['employer'] = 'LegacyX';
+
+console.log(ryan);
+
+console.log(`${ryan['firstName']} has ${ryan.friends.length} friends, and his best friend is named ${ryan.friends[0]}`);
