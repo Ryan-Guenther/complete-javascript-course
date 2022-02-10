@@ -296,30 +296,30 @@ console.log(friends.includes(23)); // True
 
 Coding Challenge #2
 
-Steven is still building his tip calculator, using the same rules as before: Tip 15% of 
-the bill if the bill value is between 50 and 300, and if the value is different, the tip is 
+Steven is still building his tip calculator, using the same rules as before: Tip 15% of
+the bill if the bill value is between 50 and 300, and if the value is different, the tip is
 20%.
 
 Your tasks:
 
-1. Write a function 'calcTip' that takes any bill value as an input and returns 
-the corresponding tip, calculated based on the rules above (you can check out 
-the code from first tip calculator challenge if you need to). Use the function 
+1. Write a function 'calcTip' that takes any bill value as an input and returns
+the corresponding tip, calculated based on the rules above (you can check out
+the code from first tip calculator challenge if you need to). Use the function
 type you like the most. Test the function using a bill value of 100
 
-2. And now let's use arrays! So create an array 'bills' containing the test data 
+2. And now let's use arrays! So create an array 'bills' containing the test data
 below
 
-3. Create an array 'tips' containing the tip value for each bill, calculated from 
+3. Create an array 'tips' containing the tip value for each bill, calculated from
 the function you created before
 
 4. Bonus: Create an array 'total' containing the total values, so the bill + tip
 
 Test data: 125, 555 and 44
 
-Hint: Remember that an array needs a value in each position, and that value can 
-actually be the returned value of a function! So you can just call a function as array 
-values (so don't store the tip values in separate variables first, but right in the new 
+Hint: Remember that an array needs a value in each position, and that value can
+actually be the returned value of a function! So you can just call a function as array
+values (so don't store the tip values in separate variables first, but right in the new
 array) �
 GOOD LUCK
 
@@ -392,6 +392,8 @@ console.log(ryan);
 
 // Dot vs Bracket Notation
 
+/*
+
 const ryan = {
   firstName: 'Ryan',
   lastName: 'Guenther',
@@ -427,3 +429,44 @@ ryan['employer'] = 'LegacyX';
 console.log(ryan);
 
 console.log(`${ryan['firstName']} has ${ryan.friends.length} friends, and his best friend is named ${ryan.friends[0]}`);
+
+*/
+
+
+/*
+
+Object Methods
+Properties on an object that contains a function
+In an object we have access to this which is scoped to the object which is calling the method
+*/
+
+const ryan = {
+  firstName: 'Ryan',
+  lastName: 'Guenther',
+  birthYear: '1984',
+  job: 'Developer',
+  friends: ['Donald', 'Robyn', 'Rob'],
+  hasDriversLicense: true,
+
+  // calcAge: function (birthYear) {
+  //   return 2022 - birthYear;
+  // }
+
+  calcAge: function () {
+    // This is referring to ryan
+    // console.log(this);
+    this.age = 2022 - this.birthYear;
+    return this.age;
+  },
+
+  getSummary: function () {
+    this.Summary = `${this.firstName} is a ${this.age} year old ${this.job}, and he has ${this.hasDriversLicense === true ? 'a' : 'no'} driver's license.`;  // and he has no driver's license
+    return this.Summary;
+  }
+}
+
+console.log(ryan.calcAge());
+console.log(ryan.age);
+// console.log(ryan['calcAge'](ryan.birthYear));
+
+console.log(ryan.getSummary());
