@@ -631,6 +631,8 @@ Looping backwards and nested loops
 
 */
 
+/*
+
 const ryan = [
   'Ryan',
   'Guenther',
@@ -662,4 +664,38 @@ for (let exercise = 1; exercise < 4; exercise++) {
   for (let rep = 1; rep < 6; rep++) {
     console.log(`Exercise ${exercise}: Lifting weight repetition ${rep}`);
   }
+}
+
+*/
+
+/*
+
+While Loop
+
+*/
+
+// for (let rep = 1; rep <= 10; rep++) {
+//   console.log(`Lifting weights repetition ${rep}`);
+// }
+
+let counter = 1;
+
+while (counter <= 10) {
+  console.log(`While: Lifting weights repetition ${counter}`);
+  counter++;
+}
+
+// While loops don't need a counter, just an expression which will run while true
+
+const rollDice = function () {
+  return Math.trunc(Math.random() * 6) + 1;
+}
+
+let dice = 0
+
+while (dice !== 6) {
+  dice = rollDice();
+  console.log(`You rolled a ${dice}`);
+  if (dice === 6)
+    console.log(`Loop is ending now that you rolled ${dice}`)
 }
