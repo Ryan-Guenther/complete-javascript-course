@@ -548,6 +548,8 @@ Control Structure - For Loops
 
 */
 
+/*
+
 // console.log('Lifting weights repetition 1');
 // console.log('Lifting weights repetition 2');
 // console.log('Lifting weights repetition 3');
@@ -561,5 +563,61 @@ Control Structure - For Loops
 
 for (let rep = 1; rep <= 10; rep++) {
   console.log(`Lifting weights repetition ${rep}`);
+}
+
+*/
+
+/*
+
+Looping Arrays, Breaking and Continuing
+
+*/
+
+const ryanArray = [
+  'Ryan',
+  'Guenther',
+  2022 - 1984,
+  'Developer',
+  ['Donald', 'Robyn', 'Rob'],
+  true
+];
+
+const types = [];
+
+for (let element = 0; element < ryanArray.length; element++) {
+  console.log(ryanArray[element], typeof ryanArray[element]);
+
+  // types[element] = typeof ryanArray[element];
+  types.push(typeof ryanArray[element]);
+}
+
+console.log(ryanArray);
+console.log(types);
+
+const years = [1991, 2007, 1969, 2020];
+
+const ages = [];
+
+for (let element = 0; element < years.length; element++) {
+  ages.push(2022 - years[element]);
+}
+
+console.log(ages);
+
+// continue - exits current iteration
+// break - exits complete loop
+
+// Only log strings
+for (let element = 0; element < ryanArray.length; element++) {
+  if (typeof ryanArray[element] !== 'string') continue;
+
+  console.log(ryanArray[element], typeof ryanArray[element]);
+}
+
+// Break if a number is found
+for (let element = 0; element < ryanArray.length; element++) {
+  if (typeof ryanArray[element] === 'number') break;
+
+  console.log(ryanArray[element], typeof ryanArray[element]);
 }
 
