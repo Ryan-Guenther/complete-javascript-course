@@ -460,7 +460,7 @@ const ryan = {
   },
 
   getSummary: function () {
-    this.Summary = `${this.firstName} is a ${this.age} year old ${this.job}, and he has ${this.hasDriversLicense === true ? 'a' : 'no'} driver's license.`;  // and he has no driver's license
+    this.Summary = `${this.firstName} is a ${this.calcAge()} year old ${this.job}, and he has ${this.hasDriversLicense === true ? 'a' : 'no'} driver's license.`;  // and he has no driver's license
     return this.Summary;
   }
 }
