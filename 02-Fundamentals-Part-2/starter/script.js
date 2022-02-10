@@ -573,6 +573,8 @@ Looping Arrays, Breaking and Continuing
 
 */
 
+/*
+
 const ryanArray = [
   'Ryan',
   'Guenther',
@@ -621,3 +623,43 @@ for (let element = 0; element < ryanArray.length; element++) {
   console.log(ryanArray[element], typeof ryanArray[element]);
 }
 
+*/
+
+/*
+
+Looping backwards and nested loops 
+
+*/
+
+const ryan = [
+  'Ryan',
+  'Guenther',
+  2022 - 1984,
+  'Developer',
+  ['Donald', 'Robyn', 'Rob'],
+  true
+];
+
+// iterate backwards
+for (let element = ryan.length - 1; element >= 0; element--) {
+
+  // If we find an array iterate through it forwards
+  if (typeof ryan[element] === 'object') {
+    for (let element2 = 0; element2 < ryan[element].length; element2++) {
+      console.log(element, element2, ryan[element][element2])
+    }
+  }
+  else {
+    console.log(element, ryan[element]);
+  }
+}
+
+console.log(typeof ryan);
+
+for (let exercise = 1; exercise < 4; exercise++) {
+  console.log(`-------- Starting exercise ${exercise}`);
+
+  for (let rep = 1; rep < 6; rep++) {
+    console.log(`Exercise ${exercise}: Lifting weight repetition ${rep}`);
+  }
+}
