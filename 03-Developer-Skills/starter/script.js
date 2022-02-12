@@ -29,6 +29,8 @@ Given an array of temperatures of one day, calcuate the temperature amplitude.
 Keep in mind that sometimes there might be a sensor error.
 */
 
+/*
+
 const temperatures = [3, -2, -6, -1, 'error', 9, 13, 17, 15, 14, 9, 5];
 
 const calcTempAmplitude = function (temps) {
@@ -94,3 +96,22 @@ const calcTempAmplitudeNew = function (temps1, temps2) {
 };
 
 console.log(`The temperater amplitude is ${calcTempAmplitudeNew(t1, t2)}`);
+
+*/
+
+const measureKelvin = function () {
+  const measurement = {
+    type: 'temp',
+    unit: 'celcius',
+    value: Number(prompt('Degrees celsius:')),
+  };
+  console.table(measurement);
+  console.log(measurement.value);
+  // console.warn(measurement.value);
+  // console.error(measurement.value);
+
+  const kelvin = measurement.value + 273;
+  return kelvin;
+};
+
+console.log(measureKelvin());
