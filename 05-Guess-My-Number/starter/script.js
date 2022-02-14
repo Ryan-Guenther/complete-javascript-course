@@ -30,12 +30,34 @@ Selecting and manipulating elements
 
 // In order to trigger something when it happens we need an event listener
 
+// Need to define a randon number between 1-20
+const secretNumber = Math.trunc(Math.random() * 20);
+let score = (document.querySelector('.score').textContent = 20);
+
+// Display number for debugging
+document.querySelector('.number').textContent = secretNumber;
+
 // Select the element and use addEventListenener
 document.querySelector('.check').addEventListener('click', () => {
   const guess = Number(document.querySelector('.guess').value);
   console.log(typeof guess, guess);
 
+  // Error if invalid guess entry
   if (!guess) {
     document.querySelector('.message').textContent = '⛔ No number!';
+  } else if (guess === secretNumber) {
+    document.querySelector('.message').textContent = '🎉 Correct Number!';
+  } else if (score > 1 && guess > secretNumber) {
+    document.querySelector('.message').textContent = '📈 Too high!';
+    score--;
+    document.querySelector('.score').textContent = score;
+  } else if (score > 1 && guess < secretNumber) {
+    document.querySelector('.message').textContent = '📉 Number is too low!';
+    score--;
+    document.querySelector('.score').textContent = score;
+  } else {
+    score--;
+    document.querySelector('.score').textContent = score;
+    document.querySelector('.message').textContent = '💥 You lost the game!';
   }
 });
