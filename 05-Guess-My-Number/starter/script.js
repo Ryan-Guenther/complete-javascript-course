@@ -45,16 +45,28 @@ document.querySelector('.check').addEventListener('click', () => {
   // Error if invalid guess entry
   if (!guess) {
     document.querySelector('.message').textContent = '⛔ No number!';
+
+    // When the player wins
   } else if (guess === secretNumber) {
     document.querySelector('.message').textContent = '🎉 Correct Number!';
+
+    document.querySelector('body').style.backgroundColor = '#60b347';
+
+    document.querySelector('.number').style.width = '30rem';
+
+    // When the guess is too high
   } else if (score > 1 && guess > secretNumber) {
     document.querySelector('.message').textContent = '📈 Too high!';
     score--;
     document.querySelector('.score').textContent = score;
+
+    // When the Guess is too low
   } else if (score > 1 && guess < secretNumber) {
     document.querySelector('.message').textContent = '📉 Number is too low!';
     score--;
     document.querySelector('.score').textContent = score;
+
+    // When the player loses the game
   } else {
     score--;
     document.querySelector('.score').textContent = score;
