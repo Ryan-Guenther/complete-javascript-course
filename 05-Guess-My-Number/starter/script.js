@@ -30,8 +30,16 @@ Selecting and manipulating elements
 
 // In order to trigger something when it happens we need an event listener
 
+const generateNumber = () => {
+  return Math.trunc(Math.random() * 20) + 1;
+};
+
+const displayMessage = message => {
+  document.querySelector('.message').textContent = message;
+};
+
 // Need to define a randon number between 1-20
-let secretNumber = Math.trunc(Math.random() * 20) + 1;
+let secretNumber = generateNumber();
 let score = (document.querySelector('.score').textContent = 20);
 let highScore = (document.querySelector('.highscore').textContent = 0);
 
@@ -42,11 +50,11 @@ document.querySelector('.check').addEventListener('click', () => {
 
   // Error if invalid guess entry
   if (!guess) {
-    document.querySelector('.message').textContent = '⛔ No number!';
+    displayMessage('⛔ No number!');
 
     // When the player wins
   } else if (guess === secretNumber) {
-    document.querySelector('.message').textContent = '🎉 Correct Number!';
+    displayMessage('🎉 Correct Number!');
 
     // Display the correct number
     document.querySelector('.number').textContent = secretNumber;
@@ -57,37 +65,32 @@ document.querySelector('.check').addEventListener('click', () => {
       highScore = document.querySelector('.highscore').textContent = score;
     }
 
+    // Make the number field wider
     document.querySelector('.number').style.width = '30rem';
 
-    // When the guess is too high
-  } else if (score > 1 && guess > secretNumber) {
-    document.querySelector('.message').textContent = '📈 Too high!';
-    score--;
-    document.querySelector('.score').textContent = score;
-
-    // When the Guess is too low
-  } else if (score > 1 && guess < secretNumber) {
-    document.querySelector('.message').textContent = '📉 Number is too low!';
+    // When the guess is wrong
+  } else if (guess !== secretNumber) {
+    displayMessage(guess > secretNumber ? '📈 Too high!' : '📉 Too low!');
     score--;
     document.querySelector('.score').textContent = score;
 
     // When the player loses the game
-  } else {
-    score--;
-    document.querySelector('.score').textContent = score;
-    document.querySelector('.message').textContent = '💥 You lost the game!';
+    if (score === 0) {
+      document.querySelector('.score').textContent = score;
+      displayMessage('💥 You lost the game!');
+    }
   }
 });
 
 // Reset the form when Again is clicked, retain the Highscore
 document.querySelector('.again').addEventListener('click', () => {
   // Fetch a new number
-  secretNumber = Math.trunc(Math.random() * 20) + 1;
+  secretNumber = generateNumber();
 
   // Hide the number again and Reset the Score and message
   document.querySelector('.number').textContent = '?';
   score = document.querySelector('.score').textContent = 20;
-  document.querySelector('.message').textContent = 'Start guessing...';
+  displayMessage('Start guessing...');
 
   // Reset the width
   document.querySelector('.number').style.width = '15rem';
