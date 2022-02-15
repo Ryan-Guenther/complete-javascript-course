@@ -31,11 +31,9 @@ Selecting and manipulating elements
 // In order to trigger something when it happens we need an event listener
 
 // Need to define a randon number between 1-20
-const secretNumber = Math.trunc(Math.random() * 20);
+let secretNumber = Math.trunc(Math.random() * 20) + 1;
 let score = (document.querySelector('.score').textContent = 20);
-
-// Display number for debugging
-document.querySelector('.number').textContent = secretNumber;
+let highScore = (document.querySelector('.highscore').textContent = 0);
 
 // Select the element and use addEventListenener
 document.querySelector('.check').addEventListener('click', () => {
@@ -50,7 +48,14 @@ document.querySelector('.check').addEventListener('click', () => {
   } else if (guess === secretNumber) {
     document.querySelector('.message').textContent = '🎉 Correct Number!';
 
+    // Display the correct number
+    document.querySelector('.number').textContent = secretNumber;
     document.querySelector('body').style.backgroundColor = '#60b347';
+
+    // Update the high score when it's been beat
+    if (score > highScore) {
+      highScore = document.querySelector('.highscore').textContent = score;
+    }
 
     document.querySelector('.number').style.width = '30rem';
 
@@ -72,4 +77,24 @@ document.querySelector('.check').addEventListener('click', () => {
     document.querySelector('.score').textContent = score;
     document.querySelector('.message').textContent = '💥 You lost the game!';
   }
+});
+
+// Reset the form when Again is clicked, retain the Highscore
+document.querySelector('.again').addEventListener('click', () => {
+  // Fetch a new number
+  secretNumber = Math.trunc(Math.random() * 20) + 1;
+
+  // Hide the number again and Reset the Score and message
+  document.querySelector('.number').textContent = '?';
+  score = document.querySelector('.score').textContent = 20;
+  document.querySelector('.message').textContent = 'Start guessing...';
+
+  // Reset the width
+  document.querySelector('.number').style.width = '15rem';
+
+  // Reset the background Color
+  document.querySelector('body').style.backgroundColor = '#222';
+
+  // Clear the Input field
+  document.querySelector('.guess').value = '';
 });
