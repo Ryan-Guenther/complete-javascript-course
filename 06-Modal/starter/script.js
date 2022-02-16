@@ -36,3 +36,17 @@ btnCloseModal.addEventListener('click', closeModal);
 
 // Clicking outside the modal should also close it
 overlay.addEventListener('click', closeModal);
+
+// In order to listen to keyboard events we still use add event listeners
+// They are global events, we listen on the document level
+// keyup - when you lift your finger
+// keypress - while holding
+// keydown - when you press down - usuallly use this
+// In order to find out what is happening we need to give the function a parameter, can call this whatever (e) is standard to reference the event
+// Javascript will call it with the event Parameter
+document.addEventListener('keydown', function (e) {
+  // gets executed for every keypress by the user
+  // console.log('A key was pressed!');
+  // console.log(e);
+  if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+});
