@@ -2,9 +2,7 @@
 
 // Players take turns rolling dice
 // When a score of 0 is rolled the Current Score is Reset and turn is passed to the next player
-
 // When a player selects Hold their current score is marked as their score
-
 // First player to 100 points wins the game
 
 // Get all the buttons
@@ -36,6 +34,9 @@ const changeActivePlayer = function () {
 
 // Rolls the dice
 const rollDice = function () {
+  // Show the die
+  dice.classList.remove('hidden');
+
   // Generate random die roll
   const number = Math.trunc(Math.random() * 6 + 1);
   // console.log(number);
@@ -96,7 +97,7 @@ const resetGame = function () {
 
   //Clear the die
   console.log(dice);
-  dice.setAttribute('src', '');
+  dice.classList.add('hidden');
 };
 
 // Attach event listeneners
