@@ -43,6 +43,7 @@ const addToCurrent = function (player, amount) {
 };
 
 const resetScore = function (player) {
+  scores[player] = 0;
   document.querySelector(`#score--${player}`).textContent = 0;
 };
 
