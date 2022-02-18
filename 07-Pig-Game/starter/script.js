@@ -85,6 +85,9 @@ const holdScore = function () {
     document
       .querySelector(`.player--${currentPlayer}`)
       .classList.add('player--winner');
+    document
+      .querySelector(`.player--${currentPlayer}`)
+      .classList.remove('active-playerr');
     // Switch PLayer
   } else {
     changeActivePlayer();
