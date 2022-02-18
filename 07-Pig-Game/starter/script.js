@@ -18,6 +18,8 @@ let currentPlayer = 0;
 const scores = [0, 0];
 let currentScore = 0;
 
+let gamePlaying = true;
+
 // Function to switch Active players
 // Returns the number of the new player
 const changeActivePlayer = function () {
@@ -54,43 +56,52 @@ const resetCurrent = function (player) {
 
 // Rolls the dice
 const rollDice = function () {
-  // Show the die
-  dice.classList.remove('hidden');
+  if (gamePlaying) {
+    // Show the die
+    dice.classList.remove('hidden');
 
-  // Generate random die roll
-  const number = Math.trunc(Math.random() * 6 + 1);
-  // console.log(number);
+    // Generate random die roll
+    const number = Math.trunc(Math.random() * 6 + 1);
+    // console.log(number);
 
-  // Display number
-  dice.setAttribute('src', `dice-${number}.png`);
+    // Display number
+    dice.setAttribute('src', `dice-${number}.png`);
 
-  // If 1 Switch Player and reset current
-  if (number === 1) {
-    resetCurrent(currentPlayer);
-    changeActivePlayer();
-  } else {
-    // Add Die roll to current score
-    addToCurrent(currentPlayer, number);
+    // If 1 Switch Player and reset current
+    if (number === 1) {
+      resetCurrent(currentPlayer);
+      changeActivePlayer();
+    } else {
+      // Add Die roll to current score
+      addToCurrent(currentPlayer, number);
+    }
   }
 };
 
 // Holds the score
 const holdScore = function () {
-  // Add current score to total score
-  addCurrentToScore(currentPlayer);
-  resetCurrent(currentPlayer);
+  if (gamePlaying) {
+    // Add current score to total score
+    addCurrentToScore(currentPlayer);
+    resetCurrent(currentPlayer);
 
-  // If Score >= 100 We have a winner
-  if (scores[currentPlayer] >= 100) {
-    document
-      .querySelector(`.player--${currentPlayer}`)
-      .classList.add('player--winner');
-    document
-      .querySelector(`.player--${currentPlayer}`)
-      .classList.remove('active-playerr');
-    // Switch PLayer
-  } else {
-    changeActivePlayer();
+    // If Score >= 100 We have a winner
+    if (scores[currentPlayer] >= 100) {
+      document
+        .querySelector(`.player--${currentPlayer}`)
+        .classList.add('player--winner');
+      document
+        .querySelector(`.player--${currentPlayer}`)
+        .classList.remove('active-playerr');
+
+      //Clear the die
+      dice.classList.add('hidden');
+
+      gamePlaying = false;
+      // Switch PLayer
+    } else {
+      changeActivePlayer();
+    }
   }
 };
 
@@ -110,6 +121,8 @@ const resetGame = function () {
   if (currentPlayer === 1) {
     changeActivePlayer();
   }
+
+  gamePlaying = true;
 
   //Clear the die
   dice.classList.add('hidden');
