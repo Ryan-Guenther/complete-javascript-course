@@ -13,8 +13,10 @@ const holdButton = document.querySelector('.btn--hold');
 // Get the Die Image
 const dice = document.querySelector('.dice');
 
-// Define the current player
+// Define the current player and starting scores
 let currentPlayer = 0;
+const scores = [0, 0];
+let currentScore = 0;
 
 // Function to switch Active players
 // Returns the number of the new player
@@ -29,29 +31,19 @@ const changeActivePlayer = function () {
     .querySelector(`.player--${currentPlayer}`)
     .classList.remove('player--active');
 
-  return nextPlayer;
+  currentPlayer = nextPlayer;
 };
 
-const getScore = function (player) {
-  return Number(document.querySelector(`#score--${player}`).textContent);
-};
+const addCurrentToScore = function (player) {
+  scores[player] += currentScore;
 
-const getCurrent = function (player) {
-  return Number(document.querySelector(`#current--${player}`).textContent);
-};
-
-const addToScore = function (player, amount) {
-  const scoreEl = document.querySelector(`#score--${player}`);
-  const score = Number(scoreEl.textContent);
-
-  scoreEl.textContent = score + amount;
+  document.querySelector(`#score--${player}`).textContent = scores[player];
 };
 
 const addToCurrent = function (player, amount) {
-  const currentEl = document.querySelector(`#current--${player}`);
-  const current = Number(currentEl.textContent);
+  currentScore += amount;
 
-  currentEl.textContent = current + amount;
+  document.querySelector(`#current--${player}`).textContent = currentScore;
 };
 
 const resetScore = function (player) {
@@ -59,7 +51,8 @@ const resetScore = function (player) {
 };
 
 const resetCurrent = function (player) {
-  document.querySelector(`#current--${player}`).textContent = 0;
+  currentScore = 0;
+  document.querySelector(`#current--${player}`).textContent = currentScore;
 };
 
 // Rolls the dice
@@ -77,7 +70,7 @@ const rollDice = function () {
   // If 1 Switch Player and reset current
   if (number === 1) {
     resetCurrent(currentPlayer);
-    currentPlayer = changeActivePlayer();
+    changeActivePlayer();
   } else {
     // Add Die roll to current score
     addToCurrent(currentPlayer, number);
@@ -87,17 +80,17 @@ const rollDice = function () {
 // Holds the score
 const holdScore = function () {
   // Add current score to total score
-  addToScore(currentPlayer, getCurrent(currentPlayer));
+  addCurrentToScore(currentPlayer);
   resetCurrent(currentPlayer);
 
   // If Score >= 100 We have a winner
-  if (getScore(currentPlayer) >= 100) {
+  if (scores[currentPlayer] >= 100) {
     document
       .querySelector(`.player--${currentPlayer}`)
       .classList.add('player--winner');
     // Switch PLayer
   } else {
-    currentPlayer = changeActivePlayer();
+    changeActivePlayer();
   }
 };
 
@@ -115,7 +108,7 @@ const resetGame = function () {
 
   // Set player 1 as starting player
   if (currentPlayer === 1) {
-    currentPlayer = changeActivePlayer(0);
+    changeActivePlayer();
   }
 
   //Clear the die
