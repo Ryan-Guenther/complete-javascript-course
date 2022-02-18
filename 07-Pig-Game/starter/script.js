@@ -92,7 +92,9 @@ const holdScore = function () {
 
   // If Score >= 100 We have a winner
   if (getScore(currentPlayer) >= 100) {
-    console.log('We have a winner!');
+    document
+      .querySelector(`.player--${currentPlayer}`)
+      .classList.add('player--winner');
     // Switch PLayer
   } else {
     currentPlayer = changeActivePlayer();
@@ -106,6 +108,10 @@ const resetGame = function () {
   resetScore(1);
   resetCurrent(0);
   resetCurrent(1);
+
+  // Remove winning class
+  document.querySelector('.player--0').classList.remove('player--winner');
+  document.querySelector('.player--1').classList.remove('player--winner');
 
   // Set player 1 as starting player
   if (currentPlayer === 1) {
