@@ -23,13 +23,9 @@ let currentScore = 0;
 const changeActivePlayer = function () {
   const nextPlayer = currentPlayer === 0 ? 1 : 0;
 
-  document
-    .querySelector(`.player--${nextPlayer}`)
-    .classList.add('player--active');
+  document.querySelector('.player--0').classList.toggle('player--active');
 
-  document
-    .querySelector(`.player--${currentPlayer}`)
-    .classList.remove('player--active');
+  document.querySelector('.player--1').classList.toggle('player--active');
 
   currentPlayer = nextPlayer;
 };
