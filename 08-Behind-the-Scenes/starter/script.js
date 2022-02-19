@@ -387,6 +387,8 @@ The This Keyword
 // This is the Window
 // console.log(this);
 
+/*
+
 const calcAge = function (birthYear) {
   console.log(2022 - birthYear);
   // This is undefined
@@ -428,3 +430,63 @@ const f = ryan.calcAge;
 
 // This is now a regular funciton call, no owner and this is undefined
 // f();
+
+*/
+
+// this creates the variable on the window and now is accessible from this
+var firstName = 'Lindsey';
+
+const ryan = {
+  firstName: 'Ryan',
+  year: 1984,
+  calcAge: function () {
+    console.log(this);
+    console.log(2022 - this.year);
+
+    // you can create a variable to hold this so you can use it in child functions
+    // This is the pre-es6 solution **Solution 1
+    // const self = this;
+    // const isMillenial = function () {
+    //   // now this is undefined cause we are in a function not being called as a method
+    //   console.log(self);
+    //   console.log(self.year >= 1981 && self.year <= 1996);
+    // };
+
+    // ES6 Solution
+    // Arrow function won't get it's own this keyword
+    const isMillenial = () => {
+      // now this is undefined cause we are in a function not being called as a method
+      console.log(this);
+      console.log(this.year >= 1981 && this.year <= 1996);
+    };
+
+    isMillenial();
+  },
+  // Arrow function uses the parent, the object is not a code block so it goes to global from here
+  greet: () => {
+    console.log(`Hey ${this.firstName}`);
+    console.log(this);
+  },
+};
+
+ryan.greet();
+ryan.calcAge();
+
+// Arguments Keyword
+const addExpr = function (a, b) {
+  console.log(arguments);
+  return a + b;
+};
+addExpr(2, 5);
+//you could pass more agruments then exepcted
+// You could iterate through them as an array
+addExpr(2, 5, 7);
+
+var addArrow = (a, b) => {
+  //more then one line of code need explicit return
+  //no arguments for arrow function
+  //console.log(arguments);
+  return a + b;
+};
+
+addArrow(1, 3);
