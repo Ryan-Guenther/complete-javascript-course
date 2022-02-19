@@ -433,6 +433,8 @@ const f = ryan.calcAge;
 
 */
 
+/*
+
 // this creates the variable on the window and now is accessible from this
 var firstName = 'Lindsey';
 
@@ -490,3 +492,38 @@ var addArrow = (a, b) => {
 };
 
 addArrow(1, 3);
+
+*/
+
+/*
+
+Primitives vs Objects (Primitive vs Reference Types)
+
+*/
+
+let age = 30;
+let oldAge = age;
+age = 31;
+
+console.log(age, oldAge);
+
+const me = {
+  name: 'Ryan',
+  age: 30,
+};
+
+// this actually creates a problem both me and friend are the same
+// so in this case both objects have a name of Rob
+const friend = me;
+me.name = 'Rob';
+
+console.log(me);
+console.log(friend);
+
+// Primitives (Primitive Types)
+// Number -- String -- Boolean -- Undefined -- Null -- Symbol -- BigInt
+// Objects (Reference Types)
+// Object Literals -- Arrays -- Functions -- Many more
+
+// Objects are stored in the Heap
+// Primitive types are stored in the call stack ( in their execution context )
