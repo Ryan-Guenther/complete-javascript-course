@@ -501,6 +501,8 @@ Primitives vs Objects (Primitive vs Reference Types)
 
 */
 
+/*
+
 let age = 30;
 let oldAge = age;
 age = 31;
@@ -527,3 +529,64 @@ console.log(friend);
 
 // Objects are stored in the Heap
 // Primitive types are stored in the call stack ( in their execution context )
+
+*/
+
+let lastName = 'Williams';
+let oldLastName = lastName;
+lastName = 'Davis';
+
+console.log(lastName);
+console.log(oldLastName);
+
+const jessica = {
+  firstName: 'Jessica',
+  lastName: 'Williams',
+  age: 27,
+};
+
+// stores reference to the heap of the jessica object
+const marriedJessica = jessica;
+
+marriedJessica.lastName = 'Davis';
+
+//both are pointing to same memoryAddress in the heap
+console.log(jessica.lastName);
+console.log(marriedJessica.lastName);
+
+function testThis(obj) {
+  // This modifies the object in the heap still so no need to return obj again
+  obj.lastName = 'New';
+}
+
+//Passes in the reference to the object
+testThis(jessica);
+
+console.log(marriedJessica.lastName);
+
+// cannot completely assign a new object to a const still
+// marriedJessica = {};
+
+// To copy an object so that you can actually change it do this
+const jessica2 = {
+  firstName: 'Jessica',
+  lastName: 'Williams',
+  age: 27,
+  family: ['Alice', 'Bob'],
+};
+
+// This doesn't work for inner objects, this just does a shallow copy (first level only)
+const jessicaCopy = Object.assign({}, jessica2);
+
+jessicaCopy.lastName = 'Davis';
+console.log(jessica2.lastName, jessicaCopy.lastName);
+
+jessicaCopy.family.push('George');
+jessicaCopy.family.push('Susan');
+
+// can see both objects have the same family array
+// object.assign couldn't handle the array, both families are same object in the heap
+console.log(jessica2.family, jessicaCopy.family);
+
+// Deep clones are needed but it's complicated to do, use something like LoDash
+// Will be explained later
