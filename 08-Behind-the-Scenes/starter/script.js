@@ -37,3 +37,48 @@ JavaScript Definition breakdown
 // how javascirpt handles multiple tasks happening at the same time
 // Since javascript runs ina  single thread it can only do one thing at a time
 // By using an event loop and runnign long running tasks in the background and pushes them back on the main thread when they are finished
+
+/*
+
+JavaScript Engine and Runtime
+
+*/
+
+// Engine is a program that executes JavaScript code
+// Google v8 engine powers Google Chrome and Node.js
+// Other browsers have other engines that power JavaScript
+
+// Engine is made up of the Call Stack and the Heap
+// Call Stack - Execution context
+// Heap - where objects are stored in memory
+
+// Compliation - Entire code is converted into machine code at once and written to a binary file that can be executed by a computer
+// With this execution can happen way after the compliation has occured
+
+// Interpretation - Interpreter runs through the source cod eand executes it line by line
+// Source code gets converted right before execution
+// JavaScript used to be purely Interpreted but that caused performance issue
+// Modern Engines use a mix of Compilation and Interpretation using Just in time Compilation
+
+// Parsing - Code is parsed (Into AST Abstract Syntax Tree)
+
+// Compilation - Generated AST is compiled into Machine Code
+
+// Execution - Machine code is executed right away (Because of Just in Time compliation)
+
+// **Note Optimization is being performed during execution, starts up poorly optimized and then the compilation is replaced in real time as the code is executed
+
+// JavaScript Runtimme in the Browser
+
+// Engine (Heap, Call Stack)
+
+// WEB APIs (DOM, Timers, Fetch API, ...) - Functionallity provided to the engine on the window object
+
+// Callbaack Queue (Click, Timer, Data, ...) - event handlers are callback functions
+
+// Event loop takes functions from the Callback Queue and puts them into the Call Stack
+
+// Javascript can exist outside of browsers in Node.js
+
+// In this case you don't have WEB APIs
+// Instead you have C++ BINDINGS & Thread Pool
