@@ -358,17 +358,19 @@ The This Keyword
 
 // Call as Method
 // this = object that is calling the method
-const jonas = {
-  name: 'Jonas',
-  year: 2989,
-  calcAge: function () {
-    // In this case this === jonas
-    return 2037 - this.year;
-  },
-};
 
-jonas.calcAge();
+/*
+  const jonas = {
+    name: 'Jonas',
+    year: 2989,
+    calcAge: function () {
+      // In this case this === jonas
+      return 2037 - this.year;
+    },
+  };
 
+  jonas.calcAge();
+    */
 // Simple function call
 // this = undefined -- Strict mode
 // without strict is the global object
@@ -381,3 +383,48 @@ jonas.calcAge();
 // this = dom element that the handler is attached to
 
 // This will never point to the function itself or the variable environment
+
+// This is the Window
+// console.log(this);
+
+const calcAge = function (birthYear) {
+  console.log(2022 - birthYear);
+  // This is undefined
+  console.log(this);
+};
+
+// calcAge(1984);
+
+const calcAgeArrow = birthYear => {
+  console.log(2022 - birthYear);
+  // Because this is an arrow function and doesn't get it's own this, it  uses lexical this (window in this case - this in global scope)
+  console.log(this);
+};
+
+// calcAgeArrow(1984);
+
+const ryan = {
+  year: 1984,
+  calcAge: function () {
+    //Returns the object calling the method
+    // if this is copied into another object it will be the object it is being called in
+    console.log(this);
+    console.log(2022 - this.year);
+  },
+};
+
+ryan.calcAge();
+
+const matilda = {
+  year: 2017,
+};
+
+matilda.calcAge = ryan.calcAge;
+
+matilda.calcAge();
+
+// Copy the function into a new variable
+const f = ryan.calcAge;
+
+// This is now a regular funciton call, no owner and this is undefined
+// f();
