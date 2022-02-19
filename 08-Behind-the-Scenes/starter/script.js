@@ -82,3 +82,30 @@ JavaScript Engine and Runtime
 
 // In this case you don't have WEB APIs
 // Instead you have C++ BINDINGS & Thread Pool
+
+/*
+
+Execution contexts and the call stack
+
+*/
+
+// Global execution context is created for top-level code
+// This is only code that is not inside a function (Functions are only executed when they are called)
+
+// Variables and Functions will be declared in the Global Execution Context
+
+// The execution context is basically an environment in which a peice of JavaScript will be executed
+
+// There is only ever one global execution context (EC) for code that is not in a function
+
+// Once the Global EC hass been created it is Executed
+
+// Once that has been completed the functions will create an execution context per function, as well as waiting for callbacks
+
+// When all functions are done executing in the call stack, the engine waits for new functions to execute
+
+// Inside an execution context we have the following
+// 1) Variable environment (let, const and var) && (functions) && (Arguments object)
+// 2) Scope chain (Consists of references to varaibles outside the current function, stored in each EC)
+// 3) this keyword
+// Arrow functions do not get an arguments object or a this keyword, they use arguments/this from the closest parent
