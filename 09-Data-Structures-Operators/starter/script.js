@@ -57,9 +57,57 @@ const restaurant = {
 
 /*
 ///////////////////////////////////////////////////////////
-The Rest Operator
+Short Circuting && and ||
 ///////////////////////////////////////////////////////////
 */
+
+// Use ANY data type with logical operators
+// Return any data type with logical operators
+// They do short-circuiting
+
+// With ||, if first value is truthy it will return that
+console.log('------ OR -----');
+console.log(3 || 'Ryan');
+console.log('' || 'Jonas');
+console.log(true || 'Lindsey');
+console.log(undefined || null);
+
+// Hello is truthy so short circuits the rest
+console.log(undefined || 0 || '' || null || 'Hello' || 23 || null);
+
+// this doesn't work if 0 is the actual number, you need to do a 0 check
+// restaurant.numGuests = 0;
+const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+console.log(guests1);
+
+const guests2 = restaurant.numGuests || 10;
+console.log(guests2);
+
+// With &&, if the first value is not falsey it will stop
+console.log('------ AND -----');
+console.log(0 && 'Ryan');
+console.log(7 && 'Ryan');
+
+// Null breaks the rest of the evaluation
+console.log('Hello' && 23 && null && 'ryan');
+
+if (restaurant.orderPizza) {
+  restaurant.orderPizza('mushrooms', 'spinach');
+}
+
+restaurant.orderPizza && restaurant.orderPizza('Cheese', 'Bacon');
+
+/*
+///////////////////////////////////////////////////////////
+Short Circuting && and ||
+///////////////////////////////////////////////////////////
+*/
+
+/*
+///////////////////////////////////////////////////////////
+The Rest Operator
+///////////////////////////////////////////////////////////
+
 
 // Destructuring
 
@@ -107,7 +155,7 @@ add(...x);
 restaurant.orderPizza('Pepperoni', 'Mushrooms', 'Bacon');
 
 restaurant.orderPizza('Cheese');
-/*
+
 ///////////////////////////////////////////////////////////
 The Rest Operator
 ///////////////////////////////////////////////////////////
