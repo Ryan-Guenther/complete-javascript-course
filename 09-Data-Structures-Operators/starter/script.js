@@ -65,9 +65,68 @@ console.log(restaurant);
 
 /*
 ///////////////////////////////////////////////////////////
-Sets
+Maps: Fundamentals
 ///////////////////////////////////////////////////////////
 */
+
+// Create an empty map
+const rest = new Map();
+
+// Fill the map (keyname and name)
+rest.set('name', 'Classico Italiano');
+rest.set(1, 'Firenze, Italy');
+rest.set(2, 'Lisbon, Portugal');
+
+// Sets can be chained
+rest
+  .set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+  .set('open', 11)
+  .set('close', 23)
+  .set(true, 'We are open :D')
+  .set(false, 'We are closed :(');
+
+console.log(rest.get('name'));
+console.log(rest.get(true));
+console.log(rest.get(1));
+
+const time = 21;
+rest.get(time > rest.get('open') && time < rest.get('close'));
+
+console.log(rest);
+
+console.log(rest.has('categories'));
+rest.delete(2);
+
+// rest.clear();
+
+rest.set([1, 2], 'Test');
+console.log(rest.size);
+
+// This looks like it should retrieve test but it doesn't
+// As much as they are written the same, they are different objects in the heap
+// to get this to work you'd have to have added the array as a const and then gotten it
+console.log(rest.get([1, 2]));
+
+// These now point to the same place in memory
+const arr = [1, 2];
+rest.set(arr, 'Test2');
+console.log(rest.get(arr));
+
+rest.set(document.querySelector('h1'), 'Heading');
+
+console.log(rest);
+
+/*
+///////////////////////////////////////////////////////////
+Maps: Fundamentals
+///////////////////////////////////////////////////////////
+*/
+
+/*
+///////////////////////////////////////////////////////////
+Sets
+///////////////////////////////////////////////////////////
+
 
 // Set of unique values, duplicates are not added
 const ordersSet = new Set([
@@ -114,7 +173,7 @@ console.log(new Set('ryanguenther').size);
 
 // You can change this back to an array easily
 
-/*
+
 ///////////////////////////////////////////////////////////
 Sets
 ///////////////////////////////////////////////////////////
