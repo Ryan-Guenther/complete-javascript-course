@@ -65,9 +65,70 @@ console.log(restaurant);
 
 /*
 ///////////////////////////////////////////////////////////
-Maps: Iteration
+Which Data Structure to Use
+///////////////////////////////////////////////////////////
+
+There can be three different sources of data
+  From the Program itself - in source code
+  From the UI - input from user or data in dom
+  External Services - web API
+
+You use data structures to store these collections of data
+
+Do you need a list of values? 
+  Array 
+  Set
+
+Key value pairs?
+  Object
+  Map
+
+Data from web APIs usually comes in JSON format normally
+Since these use the same formatting as JS Objects it's normally stored in an Object
+
+There are other JS DataStructures
+  WeakMap
+  WeakSet
+
+Not built in but do exisst
+  Stacks
+  Queues
+  Linked Lists
+  Trees
+  Hash Tables
+
+Arrays vs Sets
+  Arrays whenever you need to store in order and there may be duplicates
+  When you need to manipulate data
+
+  Sets only when working with unique values
+  When high-performance is really important (10x faster in sets then arrays)
+  Remove duplicate values from an array
+
+Objecst vs Maps
+  Objects have been traditional key/value structure
+  Easier to write and access values with . and []
+  Use when you need to include functions(methods)
+  Use when working with JSON (You can conver to map)
+
+  Maps have better performance
+  Keys can have any data type
+  Easy to Iterate
+  Easy to compute size
+  Use when you need to map key to values
+  Use when you need keys that are not strings
+
+
+///////////////////////////////////////////////////////////
+Which Data Structure to use
 ///////////////////////////////////////////////////////////
 */
+
+/*
+///////////////////////////////////////////////////////////
+Maps: Iteration
+///////////////////////////////////////////////////////////
+
 
 // can create a map without a set
 const question = new Map([
@@ -103,7 +164,7 @@ console.log([...question.entries()]);
 console.log([...question.keys()]);
 console.log([...question.values()]);
 
-/*
+
 ///////////////////////////////////////////////////////////
 Maps: Iteration
 ///////////////////////////////////////////////////////////
