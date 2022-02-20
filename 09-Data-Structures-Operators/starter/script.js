@@ -57,6 +57,33 @@ const restaurant = {
 
 /*
 ///////////////////////////////////////////////////////////
+Looping Arrays: The for-of Loop
+///////////////////////////////////////////////////////////
+*/
+
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+
+// for of loop
+// automatically loops overr entire array, gives access to current element
+for (const item of menu) console.log(item);
+
+// if you need the index in the loop you have to use the entries method
+// You can destructure here
+for (const [i, el] of menu.entries()) {
+  console.log(`${i + 1}: ${el}`);
+}
+
+// Returns an array iterator
+// console.log([...menu.entries()]);
+
+/*
+///////////////////////////////////////////////////////////
+Looping Arrays: The for-of Loop
+///////////////////////////////////////////////////////////
+*/
+
+/*
+///////////////////////////////////////////////////////////
 Coding Challenge 1
 
 We're building a football betting app (soccer for my American friends �)!
@@ -95,7 +122,7 @@ Then, call the function again with players from game.scored
 GOOD LUCK �
 
 ///////////////////////////////////////////////////////////
-*/
+
 
 const game = {
   team1: 'Bayern Munich',
@@ -183,7 +210,7 @@ console.log(
   ' is more likely to win.'
 );
 
-/*
+
 ///////////////////////////////////////////////////////////
 Coding Challenge 1
 ///////////////////////////////////////////////////////////
