@@ -65,6 +65,63 @@ console.log(restaurant);
 
 /*
 ///////////////////////////////////////////////////////////
+Sets
+///////////////////////////////////////////////////////////
+*/
+
+// Set of unique values, duplicates are not added
+const ordersSet = new Set([
+  'Pasta',
+  'Pizza',
+  'Pizza',
+  'Risotto',
+  'Pasta',
+  'Pizza',
+]);
+
+console.log(ordersSet);
+
+// Can get the length
+console.log(ordersSet.size);
+
+// Can check if exists
+console.log(ordersSet.has('Pizza'));
+console.log(ordersSet.has('Bread'));
+
+// Can add and delete
+ordersSet.add('Garlic Bread');
+ordersSet.add('Garlic Bread');
+ordersSet.delete('Risotto');
+
+// clears the values of the sets
+//ordersSet.clear();
+console.log(ordersSet);
+
+// Can still iterate through a set
+for (const order of ordersSet) {
+  console.log(order);
+}
+
+// with Sets you cannot retrieve a value, just check if its in there
+// If you need to retrieve data use an array
+
+// Example use case is to remove duplicates of arrays
+const staff = ['Water', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
+const positions = [...new Set(staff)];
+console.log(positions);
+
+console.log(new Set('ryanguenther').size);
+
+// You can change this back to an array easily
+
+/*
+///////////////////////////////////////////////////////////
+Sets
+///////////////////////////////////////////////////////////
+*/
+
+/*
+///////////////////////////////////////////////////////////
 Coding Challenge #2
 Let's continue with our football betting app! Keep using the 'game' variable from 
 before.
@@ -89,7 +146,7 @@ game, it will look like this:
  Lewandowski: 2
 }
 ///////////////////////////////////////////////////////////
-*/
+
 const game = {
   team1: 'Bayern Munich',
   team2: 'Borrussia Dortmund',
@@ -181,7 +238,7 @@ for (const scorer of game.scored) {
 
 console.log(scorers);
 
-/*
+
 ///////////////////////////////////////////////////////////
 Coding Challenge # 2
 ///////////////////////////////////////////////////////////
