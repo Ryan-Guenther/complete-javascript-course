@@ -12,11 +12,11 @@ const openingHours = {
     open: 12,
     close: 22,
   },
-  [weekdays[5]]: {
+  [weekdays[4]]: {
     open: 11,
     close: 23,
   },
-  [weekdays[6]]: {
+  [weekdays[5]]: {
     open: 0, // Open 24 hours
     close: 24,
   },
@@ -65,11 +65,52 @@ console.log(restaurant);
 
 /*
 ///////////////////////////////////////////////////////////
-Enhanced Object Literals
+Chaining ?
+///////////////////////////////////////////////////////////
+*/
+
+// you would need to do this to check to see if all optional properties exist
+//if(restaurant.openingHours && restaurant.openingHours.mon)
+// Instead you can do this optional chaining to make this much more readable, it will return unndefined if any don't exist
+console.log(restaurant.openingHours?.mon?.open);
+
+// Only if the property before the ? exists then the following one will be read otherwise undefined will be return
+
+// it exists if not null and not defined, 0 or '' do exist
+
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+for (const day of days) {
+  // console.log(day);
+  const open = restaurant.openingHours[day]?.open ?? 'closed';
+  console.log(`On ${day}, we open at ${open}`);
+}
+
+// Optional chaining on Methods
+console.log(restaurant.order?.(0, 1) ?? 'Method does not exist.');
+
+// Checks if orderRisotto exist, its undefined so with nullish operator it falls back
+console.log(restaurant.orderRisotto?.(0, 1) ?? 'Method does not exist.');
+
+// Optional chaining Arrays -- empty check
+//const users = [{ name: 'Ryan', email: 'no@email.com' }];
+const users = [];
+
+console.log(users[0]?.name ?? 'User array empty');
+
+/*
+///////////////////////////////////////////////////////////
+Chaining ?
 ///////////////////////////////////////////////////////////
 */
 
 /*
+///////////////////////////////////////////////////////////
+Enhanced Object Literals
+///////////////////////////////////////////////////////////
+
+
+
 ///////////////////////////////////////////////////////////
 Enhanced Object Literals
 ///////////////////////////////////////////////////////////
