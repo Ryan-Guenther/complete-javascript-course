@@ -57,9 +57,59 @@ const restaurant = {
 
 /*
 ///////////////////////////////////////////////////////////
-Nullish Coalescing Operator ??
+Logical Assignment Operators
 ///////////////////////////////////////////////////////////
 */
+
+const rest1 = {
+  name: 'Capri',
+  // numGuests: 20,
+  numGuests: 0,
+};
+
+const rest2 = {
+  name: 'La Piazza',
+  owner: 'Giovanni Rossi',
+};
+
+// Set default num of guests for all restaurants that don't have it
+// rest2.numGuests = rest2.numGuests || 10;
+// rest1.numGuests = rest1.numGuests || 10;
+
+// Or assignment operator
+// this will assign a value if the value is currently falsey
+// problematic if you have a 0 value
+// rest1.numGuests ||= 10;
+// rest2.numGuests ||= 10;
+
+// Nullish assignment operator will handle for 0 and behave the same as \\=
+rest1.numGuests ??= 10;
+rest2.numGuests ??= 10;
+
+// And assignment operator
+// anonymize the owners
+
+// Results in undefined if and operator short circuits
+// rest1.owner = rest1.owner && '<ANONYMOUS>';
+// rest2.owner = rest2.owner && '<ANONYMOUS>';
+
+// This won't result in undefined
+rest1.owner &&= '<ANONYMOUS>';
+rest2.owner &&= '<ANONYMOUS>';
+
+console.log(rest1, rest2);
+
+/*
+///////////////////////////////////////////////////////////
+Logical Assignment Operators
+///////////////////////////////////////////////////////////
+*/
+
+/*
+///////////////////////////////////////////////////////////
+Nullish Coalescing Operator ??
+///////////////////////////////////////////////////////////
+
 
 restaurant.numGuests = 0;
 const guests2 = restaurant.numGuests || 10;
@@ -70,7 +120,7 @@ console.log(guests2);
 const guestCorrect = restaurant.numGuests ?? 10;
 console.log(guestCorrect);
 
-/*
+
 ///////////////////////////////////////////////////////////
 Nullish Coalescing Operator ??
 ///////////////////////////////////////////////////////////
