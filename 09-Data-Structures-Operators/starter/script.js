@@ -12,6 +12,21 @@ const restaurant = {
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
 
+  openingHours: {
+    thu: {
+      open: 12,
+      close: 22,
+    },
+    fri: {
+      open: 11,
+      close: 23,
+    },
+    sat: {
+      open: 0, // Open 24 hours
+      close: 24,
+    },
+  },
+
   order: function (starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
@@ -34,27 +49,75 @@ const restaurant = {
     );
   },
 
-  openingHours: {
-    thu: {
-      open: 12,
-      close: 22,
-    },
-    fri: {
-      open: 11,
-      close: 23,
-    },
-    sat: {
-      open: 0, // Open 24 hours
-      close: 24,
-    },
+  orderPizza: function (mainIngredient, ...otherIngredients) {
+    console.log(mainIngredient);
+    console.log(otherIngredients);
   },
 };
 
 /*
 ///////////////////////////////////////////////////////////
-The Spread Operator (...)
+The Rest Operator
 ///////////////////////////////////////////////////////////
 */
+
+// Destructuring
+
+// Spread syntax, because on the right side of the = operator
+const arr = [1, 2, ...[3, 4]];
+
+const [] = [1, 2, 3, 4, 5];
+
+// This is the rest operator, you can see first and second get scored and  rest get dumped into a new array
+const [a, b, ...others] = [1, 2, 3, 4, 5];
+console.log(a, b, others);
+
+// the rest opearotr collects unused items in destructuring
+
+// Does not include skipped elements, Pasta was skipped here, it just grabs everything else
+const [pizza, , risotto, ...otherFood] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
+
+console.log(pizza, risotto, otherFood);
+
+// Also works for objects
+
+const { sat, ...weekdays } = restaurant.openingHours;
+console.log(sat, weekdays);
+
+// Functions -- This will take multiple values and package into an array
+const add = function (...numbers) {
+  // console.log(numbers);
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) {
+    sum += numbers[i];
+  }
+  console.log(sum);
+};
+
+add(2, 3);
+add(5, 3, 7, 2);
+add(8, 2, 5, 3, 2, 1, 4);
+
+const x = [23, 5, 7];
+add(...x);
+
+restaurant.orderPizza('Pepperoni', 'Mushrooms', 'Bacon');
+
+restaurant.orderPizza('Cheese');
+/*
+///////////////////////////////////////////////////////////
+The Rest Operator
+///////////////////////////////////////////////////////////
+*/
+
+/*
+///////////////////////////////////////////////////////////
+The Spread Operator (...)
+///////////////////////////////////////////////////////////
+
 
 const arr = [7, 8, 9];
 const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
@@ -110,7 +173,7 @@ restaurantCopy.name = 'Ristorante Roma';
 
 console.log(restaurantCopy.name, restaurant.name);
 
-/*
+
 ///////////////////////////////////////////////////////////
 The Spread Operator (...)
 ///////////////////////////////////////////////////////////
