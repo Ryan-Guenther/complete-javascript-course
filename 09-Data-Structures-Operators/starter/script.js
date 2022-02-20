@@ -57,9 +57,30 @@ const restaurant = {
 
 /*
 ///////////////////////////////////////////////////////////
-Short Circuting && and ||
+Nullish Coalescing Operator ??
 ///////////////////////////////////////////////////////////
 */
+
+restaurant.numGuests = 0;
+const guests2 = restaurant.numGuests || 10;
+console.log(guests2);
+
+// Nullish operator uses nullish values not falsey
+// Nullish are Null and Undefined (NOT 0 or '')
+const guestCorrect = restaurant.numGuests ?? 10;
+console.log(guestCorrect);
+
+/*
+///////////////////////////////////////////////////////////
+Nullish Coalescing Operator ??
+///////////////////////////////////////////////////////////
+*/
+
+/*
+///////////////////////////////////////////////////////////
+Short Circuting && and ||
+///////////////////////////////////////////////////////////
+
 
 // Use ANY data type with logical operators
 // Return any data type with logical operators
@@ -97,7 +118,7 @@ if (restaurant.orderPizza) {
 
 restaurant.orderPizza && restaurant.orderPizza('Cheese', 'Bacon');
 
-/*
+
 ///////////////////////////////////////////////////////////
 Short Circuting && and ||
 ///////////////////////////////////////////////////////////
