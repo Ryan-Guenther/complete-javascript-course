@@ -16,6 +16,18 @@ const restaurant = {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
 
+  // can destructure right in the function
+  orderDelivery: function ({
+    starterIndex = 1,
+    mainIndex = 0,
+    time = '20:00',
+    address,
+  }) {
+    console.log(
+      `Order recived! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}.`
+    );
+  },
+
   openingHours: {
     thu: {
       open: 12,
@@ -31,6 +43,62 @@ const restaurant = {
     },
   },
 };
+
+/*
+///////////////////////////////////////////////////////////
+Destructuring arrays
+///////////////////////////////////////////////////////////
+*/
+
+/*
+///////////////////////////////////////////////////////////
+Destructuring objects
+///////////////////////////////////////////////////////////
+*/
+
+restaurant.orderDelivery({
+  time: '22:30',
+  address: 'Via del Sole, 21',
+  mainIndex: 2,
+  starterIndex: 2,
+});
+
+// If we dont' pass in the time and mainIndex it would either be undefined or default value
+restaurant.orderDelivery({ address: 'Via del Sole, 21', starterIndex: 1 });
+
+const { name, openingHours, categories } = restaurant;
+console.log(name, openingHours, categories);
+
+const {
+  name: restaurantName,
+  openingHours: hours,
+  categories: tags,
+} = restaurant;
+console.log(restaurantName, hours, tags);
+
+// Can setup default values for destructured parts of an object to avoid undefined
+const { menu = [], starterMenu: starters = [] } = restaurant;
+console.log(menu, starters);
+
+// Mutating variables
+let a = 111;
+let b = 999;
+const obj = { a: 23, b: 7, cc: 14 };
+
+// if you start with { it expects a code block - you have to wrap in paranthesis
+({ a, b } = obj);
+console.log(a, b);
+
+// nested objects this is how you can destructure
+const {
+  fri: { open: o, close: c },
+} = openingHours;
+console.log(o, c);
+
+/*
+///////////////////////////////////////////////////////////
+Destructuring arrays
+///////////////////////////////////////////////////////////
 
 // Destructuring is a ES6 feature to break down into smaller structures (variables)
 
@@ -78,3 +146,9 @@ console.log(i, j, k);
 // We can specify default values
 const [p = 1, q = 1, r = 1] = [8, 9];
 console.log(p, q, r);
+
+
+///////////////////////////////////////////////////////////
+Destructuring arrays
+///////////////////////////////////////////////////////////
+*/
