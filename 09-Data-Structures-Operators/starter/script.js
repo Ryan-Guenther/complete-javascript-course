@@ -114,18 +114,13 @@ gameEvents.delete(64);
 console.log(gameEvents);
 
 // 3
-const duringGameEvents = new Map();
-for (const [time, event] of gameEvents) {
-  if (time < 90) duringGameEvents.set(time, event);
-}
-
-const average = 90 / duringGameEvents.size;
+const average = 90 / gameEvents.size;
 console.log(`An event happened, on average, every ${average} minutes`);
 
 // 4
 for (const [time, event] of gameEvents) {
   console.log(
-    `${(time <= 45 && 'FIRST HALF') || 'SECOND HALF'} ${time}: ${event}`
+    `[${(time <= 45 && 'FIRST') || 'SECOND'} HALF] ${time}: ${event}`
   );
 }
 /*
