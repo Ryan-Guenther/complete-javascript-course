@@ -63,9 +63,76 @@ const restaurant = {
 
 /*
 ///////////////////////////////////////////////////////////
-Working with Strings - Part 2
+Working with Strings - Part 3
 ///////////////////////////////////////////////////////////
 */
+
+// String Split works on a divider
+// breaks it into elements of an array excluding the split character
+console.log('a+very+nice+string'.split('+'));
+console.log('Ryan Guenther'.split(' '));
+
+const [firstName, lastName] = 'Ryan Guenther'.split(' ');
+console.log(firstName, lastName);
+
+// Join method will build based on array
+// Specifies the character to separate by
+const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' ');
+console.log(newName);
+
+const capitalizeName = function (name) {
+  const names = name.split(' ');
+  const namesUpper = [];
+  for (let n of names) {
+    // namesUpper.push(n[0].toUpperCase() + n.slice(1));
+    namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
+  }
+  console.log(names.join(' '), namesUpper.join(' '));
+};
+
+capitalizeName('jessica ann smith davis');
+capitalizeName('ryan guenther');
+
+// Padding
+const message = 'Go to gate 23!';
+// will lead the string with characters up to the given length
+console.log(message.padStart(20, '+').padEnd(30, '+'));
+console.log('ryan'.padStart(20, '+').padEnd(30, '+'));
+
+// Credit cards are often masked
+const maskCreditCard = function (number) {
+  const str = number + ''; // Converts the number to a string
+  const newString = str.slice(-4).padStart(str.length, '#');
+  console.log(newString);
+};
+
+maskCreditCard('4422441166998822');
+maskCreditCard(4422441166998124);
+maskCreditCard(153029);
+
+// Repeat
+const message2 = 'Bad weather... All Departures Delayed... ';
+console.log(message2.repeat(5));
+
+const planesInLine = function (n) {
+  console.log(`There are ${n} planes in line ${'✈️'.repeat(n)}`);
+};
+
+planesInLine(23);
+planesInLine(3);
+planesInLine(12);
+
+/*
+///////////////////////////////////////////////////////////
+Working with Strings - Part 3
+///////////////////////////////////////////////////////////
+*/
+
+/*
+///////////////////////////////////////////////////////////
+Working with Strings - Part 2
+///////////////////////////////////////////////////////////
+
 
 const airline = 'TAP Air Portugal';
 
@@ -144,7 +211,7 @@ console.log(checkBaggage('Socks and a camera'));
 
 console.log(checkBaggage('Got some snacks and a gun for protection'));
 
-/*
+
 ///////////////////////////////////////////////////////////
 Working with Strings - Part 2
 ///////////////////////////////////////////////////////////
