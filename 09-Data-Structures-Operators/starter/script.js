@@ -63,9 +63,98 @@ const restaurant = {
 
 /*
 ///////////////////////////////////////////////////////////
-Working with Strings - Part 1
+Working with Strings - Part 2
 ///////////////////////////////////////////////////////////
 */
+
+const airline = 'TAP Air Portugal';
+
+console.log(airline.toLowerCase());
+console.log(airline.toUpperCase());
+
+// Fix capitalization in a anme
+const passenger = 'jOnAS'; // should be Jonas
+
+// const passengerLower = passenger.toLowerCase();
+// const passengerCorrect =
+//   passengerLower[0].toUpperCase() + passengerLower.slice(1);
+// console.log(passengerLower, passengerCorrect);
+
+const fixName = function (name) {
+  return name[0].toUpperCase() + name.slice(1).toLowerCase();
+};
+
+const passengerCorrect = fixName(passenger);
+console.log(passengerCorrect);
+
+// Comparing emails
+const email = 'hello@jonas.io';
+const loginEmail = '  Hello@Jonas.io \n';
+
+// const compareEmailAddresses = function (email1, email2) {
+//   const lowerEmail = email2.toLowerCase();
+//   const trimmedEmail = lowerEmail.trim();
+//   console.log(trimmedEmail);
+// };
+
+// compareEmailAddresses(email, loginEmail);
+
+// You can trim whitespace also can use trimStart or trimEnd
+const normalizedEmail = loginEmail.toLowerCase().trim();
+console.log(email === normalizedEmail);
+
+// Replacing parts of strings
+const priceUS = '$288.97';
+const priceGB = priceUS.replace('$', '£').replace('.', ',');
+console.log(priceGB);
+
+const announcement =
+  'All passengers come to boarding door 23.  Boarding door 23!';
+
+// this would only replace first occurence
+console.log(announcement.replace('door', 'gate'));
+// Now there is the replaceAll method you can call to change all occurneces
+console.log(announcement.replaceAll('door', 'gate'));
+// Before the addition of replaceAll you had to use regex
+// Wrap strings with / and end with g for global to replace all
+console.log(announcement.replace(/door/g, 'gate'));
+
+// Booleans
+const plane = 'Airbus A320neo';
+console.log(plane.includes('A320'));
+console.log(plane.includes('Boeing'));
+console.log(plane.startsWith('Air'));
+console.log(plane.endsWith('neo'));
+
+if (plane.startsWith('Airbus') && plane.endsWith('neo')) {
+  console.log(`${plane} is part of the new Airbus family.`);
+}
+
+// Practice exercise
+const checkBaggage = function (items) {
+  const baggage = items.toLowerCase();
+  return baggage.includes('gun') || baggage.includes('knife')
+    ? 'You are not allowed on board'
+    : 'Welcome Aboard';
+};
+
+console.log(checkBaggage('I have a laptop, some Food and a pocket knife'));
+
+console.log(checkBaggage('Socks and a camera'));
+
+console.log(checkBaggage('Got some snacks and a gun for protection'));
+
+/*
+///////////////////////////////////////////////////////////
+Working with Strings - Part 2
+///////////////////////////////////////////////////////////
+*/
+
+/*
+///////////////////////////////////////////////////////////
+Working with Strings - Part 1
+///////////////////////////////////////////////////////////
+
 const airline = 'TAP Air Portugal';
 const plane = 'A320';
 
@@ -111,7 +200,7 @@ console.log(checkMiddleSeat('3E'));
 // When you call one of these methods Javascript does Boxing where it turns toa n object, the methods return string primitives
 console.log(new String('Jonas'));
 
-/*
+
 ///////////////////////////////////////////////////////////
 Working with Strings - Part 1
 ///////////////////////////////////////////////////////////
