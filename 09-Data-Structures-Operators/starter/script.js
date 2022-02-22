@@ -69,7 +69,12 @@ Write a program that receives a list of variable names written in underscore_cas
 and convert them to camelCase.
 The input will come from a textarea inserted into the DOM (see code below to 
 insert the elements), and conversion will happen when the button is pressed.
-
+  
+  underscore_case
+  first_name   
+ Some_Variable  
+calculate_AGE
+delayed_departure
 ///////////////////////////////////////////////////////////
 */
 
@@ -90,6 +95,7 @@ const testResults = [
 
 document.body.append(document.createElement('textarea'));
 document.body.append(document.createElement('button'));
+document.body.append(document.createElement('textarea'));
 
 const UnderscoreToCamelCase = function () {
   // get input
@@ -102,28 +108,30 @@ const UnderscoreToCamelCase = function () {
 
     const newWord = [];
 
-    for (let i = 0; i < split.length; i++) {
+    for (const [index, splice] of split.entries()) {
       // if it's the first word then lets conver to lower and store
-      const lower = (split[i] + '').toLowerCase().trim();
-      if (i === 0) {
+      const lower = (splice + '').toLowerCase().trim();
+      if (index === 0) {
         newWord.push(lower);
       } else {
         newWord.push(lower.replace(lower[0], lower[0].toUpperCase()));
       }
     }
+
     newWords.push(newWord.join(''));
+  }
+
+  for (const [index, camelCase] of newWords.entries()) {
+    console.log(camelCase.padEnd(20, ' '), '✅'.repeat(index + 1));
   }
 
   // Test Ouput
   for (let i = 0; i < newWords.length; i++) {
-    console.log(newWords[i] === newWords[i]);
+    console.log(newWords[i] === testResults[i]);
   }
 
-  document.querySelector('textarea').value = newWords.join('\n');
+  document.querySelectorAll('textarea')[1].value = newWords.join('\n');
 };
-const results = UnderscoreToCamelCase(testData);
-
-console.log(results, testData, testResults);
 
 // add the event listenere
 document
