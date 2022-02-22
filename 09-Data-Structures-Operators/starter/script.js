@@ -63,9 +63,84 @@ const restaurant = {
 
 /*
 ///////////////////////////////////////////////////////////
-Working with Strings - Part 3
+Coding Challenge #4
+
+Write a program that receives a list of variable names written in underscore_case 
+and convert them to camelCase.
+The input will come from a textarea inserted into the DOM (see code below to 
+insert the elements), and conversion will happen when the button is pressed.
+
 ///////////////////////////////////////////////////////////
 */
+
+const testData = [
+  'underscore_case',
+  'first_name',
+  'Some_Variable',
+  'calculate_AGE',
+  'delayed_departure',
+];
+const testResults = [
+  'underscoreCase',
+  'firstName',
+  'someVariable',
+  'calculateAge',
+  'delayedDeparture',
+];
+
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+
+const UnderscoreToCamelCase = function () {
+  // get input
+  const words = document.querySelector('textarea').value.split('\n');
+  // Iterate through the words that were passed in
+  const newWords = [];
+  for (const word of words) {
+    // for each word we need to split them into an array
+    const split = word.split('_');
+
+    const newWord = [];
+
+    for (let i = 0; i < split.length; i++) {
+      // if it's the first word then lets conver to lower and store
+      const lower = (split[i] + '').toLowerCase().trim();
+      if (i === 0) {
+        newWord.push(lower);
+      } else {
+        newWord.push(lower.replace(lower[0], lower[0].toUpperCase()));
+      }
+    }
+    newWords.push(newWord.join(''));
+  }
+
+  // Test Ouput
+  for (let i = 0; i < newWords.length; i++) {
+    console.log(newWords[i] === newWords[i]);
+  }
+
+  document.querySelector('textarea').value = newWords.join('\n');
+};
+const results = UnderscoreToCamelCase(testData);
+
+console.log(results, testData, testResults);
+
+// add the event listenere
+document
+  .querySelector('button')
+  .addEventListener('click', UnderscoreToCamelCase);
+
+/*
+///////////////////////////////////////////////////////////
+Coding Challenge #4
+///////////////////////////////////////////////////////////
+*/
+
+/*
+///////////////////////////////////////////////////////////
+Working with Strings - Part 3
+///////////////////////////////////////////////////////////
+
 
 // String Split works on a divider
 // breaks it into elements of an array excluding the split character
@@ -122,7 +197,7 @@ planesInLine(23);
 planesInLine(3);
 planesInLine(12);
 
-/*
+
 ///////////////////////////////////////////////////////////
 Working with Strings - Part 3
 ///////////////////////////////////////////////////////////
