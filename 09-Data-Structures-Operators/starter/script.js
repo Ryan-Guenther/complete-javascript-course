@@ -61,7 +61,61 @@ const restaurant = {
   },
 };
 
-//console.log(restaurant);
+/*
+///////////////////////////////////////////////////////////
+Working with Strings - Part 1
+///////////////////////////////////////////////////////////
+*/
+const airline = 'TAP Air Portugal';
+const plane = 'A320';
+
+// Can easily return character at like an array
+console.log(plane[0]);
+
+// Can also access the length, similar to an array
+console.log(airline.length);
+
+// can get position of a letter either first or last
+console.log(airline.indexOf('r'));
+console.log(airline.lastIndexOf('r'));
+console.log(airline.indexOf('Portugal'));
+
+// can use slice to get part of a string based on index
+// 4 is the begin position so it slices off the first 4 spaces
+console.log(airline.slice(4)); // 'Air Portugal'
+
+// Slice returns a new string, it doesn't mutate the existing unless you pass it into it
+console.log(airline.slice(4, 7)); // 'Air'
+
+// You can extract the index using the indexOf
+// this would always return the first word
+console.log(airline.slice(0, airline.indexOf(' ')));
+
+// This would always return the last word
+console.log(airline.slice(airline.lastIndexOf(' ') + 1));
+
+// If you pass a negative it starts from the end
+console.log(airline.slice(-2));
+console.log(airline.slice(1, -1));
+
+const checkMiddleSeat = function (seat) {
+  // B and E are middle seats
+  const letter = seat.slice(-1);
+  return letter === 'B' || letter === 'E' ? true : false;
+};
+
+console.log(checkMiddleSeat('11B'));
+console.log(checkMiddleSeat('23C'));
+console.log(checkMiddleSeat('3E'));
+
+// When you call one of these methods Javascript does Boxing where it turns toa n object, the methods return string primitives
+console.log(new String('Jonas'));
+
+/*
+///////////////////////////////////////////////////////////
+Working with Strings - Part 1
+///////////////////////////////////////////////////////////
+*/
 
 /*
 ///////////////////////////////////////////////////////////
@@ -89,7 +143,7 @@ whether it's in the first half or second half (after 45 min) of the game, like t
 
 
 ///////////////////////////////////////////////////////////
-*/
+
 
 const gameEvents = new Map([
   [17, '⚽ GOAL'],
@@ -123,7 +177,7 @@ for (const [time, event] of gameEvents) {
     `[${(time <= 45 && 'FIRST') || 'SECOND'} HALF] ${time}: ${event}`
   );
 }
-/*
+
 ///////////////////////////////////////////////////////////
 Coding Challenge #3
 ///////////////////////////////////////////////////////////
