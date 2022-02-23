@@ -109,3 +109,73 @@ Execution contexts and the call stack
 // 2) Scope chain (Consists of references to varaibles outside the current function, stored in each EC)
 // 3) this keyword
 // Arrow functions do not get an arguments object or a this keyword, they use arguments/this from the closest parent
+
+/*
+
+Scope and Scope Chain 
+
+*/
+
+// Scoping - How our variables are organized and access
+
+// Lexical Scoping -  Scoping is controlled by the placement of functions and blocks in the code
+
+// Scope - Space or environment in which a certain variable is declared
+// global scope // function scope // block scope
+
+// Scope of a variable - the region of our code where a varialbe can be accessed
+
+// Global Scope
+// Top level code
+// Variables declared otuside any function or block, they are accessible everywhere
+
+// Function Scope
+// Any variables declared in a function
+// Also called local scope
+
+// Block Scope
+// Block is anything between { } // If Statements or FOR statements
+// Only let/const variables are restricted to the block
+// Variables declared with var are not block scope and would go up to the Function/Global Scope
+
+// Functions are block scoped as well
+
+// Example of scope types
+
+/*
+
+// Global Scoped
+const myName = 'Ryan';
+
+// Global Scoped
+function first() {
+  // local/function scope
+  const age = 38;
+
+  if (age >= 30) {
+    // block scope
+    const decade = 3;
+    // local/function scope
+    var millenial = true;
+  }
+
+  // Function scoped
+  function second() {
+    // function scoped
+    const job = 'teacher';
+
+    console.log(`${myName} is a ${age}-old ${job}`);
+  }
+
+  second();
+}
+
+first();
+
+*/
+
+/* Scope Chain vs Call Stack */
+
+// Scope chain gets the context based on the way it was written
+// Not based on the order that it is called
+// For the above exaample for second() to have access to age it needs to be neseted in first() function
