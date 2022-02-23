@@ -2,9 +2,33 @@
 
 /*
 ---------------------------------------------
-How Passing Arguments Works: Value vs Reference
+First-Class and Higher-Order Functions
 ---------------------------------------------
 */
+
+// JavaScirpt treats functions as first-class citizens
+// Functions are simply values
+// Functions are just another "type" of funcitons
+
+// Because of this you can store functions in variables or properties
+
+// higher order function is a function that receives another function as an argument
+// or a function that returns a function
+
+// when you add an event AudioListener, the addEventListener is the higher order function
+// the function that you pass in is the callback function
+
+/*
+---------------------------------------------
+First-Class and Higher-Order Functions
+---------------------------------------------
+*/
+
+/*
+---------------------------------------------
+How Passing Arguments Works: Value vs Reference
+---------------------------------------------
+
 
 const flight = 'LH234';
 const jonas = {
@@ -37,7 +61,7 @@ newPassport(jonas);
 checkIn(flight, jonas);
 console.log(jonas);
 
-/*
+
 ---------------------------------------------
 How Passing Arguments Works: Value vs Reference
 ---------------------------------------------
