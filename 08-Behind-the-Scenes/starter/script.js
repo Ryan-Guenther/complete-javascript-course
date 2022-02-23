@@ -281,6 +281,8 @@ makes variables accessible/usable in the code before they are declared
 
 /* Hoisting and TDZ in Practice */
 
+/*
+
 // Hoisting with Varaibles
 
 //undefined
@@ -337,3 +339,45 @@ const z = 3;
 console.log(x === window.x);
 console.log(y === window.y);
 console.log(z === window.z);
+
+*/
+
+/*
+
+The This Keyword
+
+*/
+
+// Created for every execution context (every function)
+
+// Points to the owner of the function
+
+// the value of this is not static, it depends on how the function is called and only assigned when the function is called
+
+// Four different ways to call a function
+
+// Call as Method
+// this = object that is calling the method
+const jonas = {
+  name: 'Jonas',
+  year: 2989,
+  calcAge: function () {
+    // In this case this === jonas
+    return 2037 - this.year;
+  },
+};
+
+jonas.calcAge();
+
+// Simple function call
+// this = undefined -- Strict mode
+// without strict is the global object
+
+// Arrow fnction call
+// this = this of surrounding function
+// doesn't get it's own this keyword
+
+// Event Listener
+// this = dom element that the handler is attached to
+
+// This will never point to the function itself or the variable environment
