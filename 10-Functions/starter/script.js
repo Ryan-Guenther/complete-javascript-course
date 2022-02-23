@@ -2,9 +2,52 @@
 
 /*
 ---------------------------------------------
-Default Parameters
+How Passing Arguments Works: Value vs Reference
 ---------------------------------------------
 */
+
+const flight = 'LH234';
+const jonas = {
+  name: 'Jonas Schmedtmann',
+  passport: 24739479284,
+};
+
+const checkIn = function (flightNum, passenger) {
+  // Primitives are passed by value, if they are mutated here it doesn't ripple out
+  // Objects are passed by value but the value is the reference ot the object in the heap, so if you mutate them they mutate everywhere
+  // Javascirpt is always pass by value, just value of objects are memory addresses.  It's not passing byref
+  flightNum = 'LH999';
+  passenger.name = 'Mr. ' + passenger.name;
+
+  if (passenger.passport === 24739479284) {
+    alert('Check in');
+  } else {
+    alert('Wrong passport!');
+  }
+};
+
+// checkIn(flight, jonas);
+console.log(flight, jonas);
+
+const newPassport = function (person) {
+  person.passport = Math.trunc(Math.random() * 10000000000);
+};
+
+newPassport(jonas);
+checkIn(flight, jonas);
+console.log(jonas);
+
+/*
+---------------------------------------------
+How Passing Arguments Works: Value vs Reference
+---------------------------------------------
+*/
+
+/*
+---------------------------------------------
+Default Parameters
+---------------------------------------------
+
 
 const bookings = [];
 
@@ -35,7 +78,7 @@ createBooking('LH123', 2, 800);
 // Passing a parameter as undefined will use the default value
 createBooking('LH123', undefined, 1000);
 
-/*
+
 ---------------------------------------------
 Default Parameters
 ---------------------------------------------
