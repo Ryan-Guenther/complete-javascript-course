@@ -179,3 +179,58 @@ first();
 // Scope chain gets the context based on the way it was written
 // Not based on the order that it is called
 // For the above exaample for second() to have access to age it needs to be neseted in first() function
+
+/* 
+
+Scoping in Practice
+
+*/
+
+// Global Scoped Function
+function calcAge(birthYear) {
+  // Function Scope created here
+  const age = 2022 - birthYear;
+  // console.log(firstName);
+
+  function printAge() {
+    // Is able to walk up to the function scope and global scope to access these variables
+    const output = `${firstName} are ${age}, born in ${birthYear}`;
+    console.log(output);
+
+    if (birthYear >= 1981 && birthYear <= 1996) {
+      //New Block Scope here
+
+      // You can re-declare variables in a child scope
+      const firstName = 'NotRyan';
+
+      const str = `Oh, and you're a millenial, ${firstName}`;
+      var millenial = true;
+      console.log(str);
+
+      // this is also block scoped in strict mode
+      function add(a, b) {
+        return a + b;
+      }
+    }
+
+    // const and let are block scoped cannot access here
+    // console.log(str);
+
+    // Var are function scoped they ignore block scoping
+    console.log(millenial);
+
+    // if strict mode was not enabled this would work
+    // add(2, 3);
+  }
+
+  printAge();
+
+  return age;
+}
+
+//Global scoped first name
+const firstName = 'Ryan';
+calcAge(1984);
+// Cannot access child scopes
+//console.log(age);
+//printAge();
