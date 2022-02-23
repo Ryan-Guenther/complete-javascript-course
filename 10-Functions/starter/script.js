@@ -2,9 +2,41 @@
 
 /*
 ---------------------------------------------
-Functions accepting Callback Functions
+Functions Returning Functions
 ---------------------------------------------
 */
+
+// This works because of closures (covered lateron in course)
+// Greet returns a new function into the variable that can then be called
+const greet = function (greeting) {
+  return function (name) {
+    console.log(`${greeting} ${name}`);
+  };
+};
+
+// Rewritten using arrow functions
+// can be more confusing to interpret
+const greet2 = greeting => name => console.log(`${greeting} ${name}`);
+
+const greeterHey = greet('Hey');
+greeterHey('Ryan');
+greeterHey('Lindsey');
+
+greet('Hello')('Rob');
+
+greet2('Sup')('Ryan');
+
+/*
+---------------------------------------------
+Functions Returning Functions
+---------------------------------------------
+*/
+
+/*
+---------------------------------------------
+Functions accepting Callback Functions
+---------------------------------------------
+
 
 const oneWord = function (str) {
   return str.replaceAll(' ', '').toLowerCase();
@@ -35,7 +67,7 @@ document.body.addEventListener('click', high5);
 
 ['Jonas', 'Martha', 'Adam'].forEach(high5);
 
-/*
+
 ---------------------------------------------
 Functions accepting Callback Functions
 ---------------------------------------------
