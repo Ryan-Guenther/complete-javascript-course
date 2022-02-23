@@ -74,21 +74,22 @@ const flights =
   Departure from FAO to LIS (12h30)
 */
 
-function AirportCode(text) {
-  return text.toUpperCase().substring(0, 3);
+function getCode(text) {
+  return text.toUpperCase().slice(0, 3);
 }
 
-const records = flights.split('+');
-for (const r of records) {
-  const [text, from, to, time] = r.split(';');
-  //console.log(text, from, to, time);
-  console.log(
-    `${text.includes('Delayed') ? '🔴' : ''}${text
-      .replace('_', '')
-      .replace('_', ' ')} from ${AirportCode(from)} to ${AirportCode(
-      to
-    )} (${time.replace(':', 'h')})`.padStart(50, ' ')
-  );
+for (const flight of flights.split('+')) {
+  const [text, from, to, time] = flight.split(';');
+
+  const output = `${text.includes('Delayed') ? '🔴' : ''}${text.replaceAll(
+    '_',
+    ' '
+  )} from ${getCode(from)} to ${getCode(to)} (${time.replace(
+    ':',
+    'h'
+  )})`.padStart(50, ' ');
+
+  console.log(output);
 }
 
 /*
