@@ -278,3 +278,62 @@ makes variables accessible/usable in the code before they are declared
 // Hoisting was implemented to allow to use functions before actual declaration
 // This helps make code more variable
 // Had to work with Var to make it work at the time
+
+/* Hoisting and TDZ in Practice */
+
+// Hoisting with Varaibles
+
+//undefined
+console.log(me);
+//cannot access before initialization
+// console.log(job);
+//cannot access before initialization
+//console.log(year);
+//This is not defined
+//console.log(whatsThis);
+
+var me = 'Ryan';
+let job = 'developer';
+const year = 1991;
+
+// Hoisting with Functions
+
+// Can access and use before declaration
+console.log(addDecl(2, 3));
+
+// cannot access before initialzation
+//console.log(addExpr(4, 3));
+
+// this is undefined so it cannot be accessed as funciton
+//console.log(addArrow(1, 2));
+
+// This is the only function you can use before it is declared
+function addDecl(a, b) {
+  return a + b;
+}
+
+const addExpr = function (a, b) {
+  return a + b;
+};
+
+var addArrow = (a, b) => a + b;
+
+// Example
+
+// right now numProducts is undefined because of hosting var allowing execution
+if (!numProducts) deleteShoppingCard();
+
+var numProducts = 10;
+
+function deleteShoppingCard() {
+  console.log('All products are deleted!');
+}
+
+// Var gets created as a property on the window object
+var x = 1;
+let y = 2;
+const z = 3;
+
+console.log(x === window.x);
+console.log(y === window.y);
+console.log(z === window.z);
