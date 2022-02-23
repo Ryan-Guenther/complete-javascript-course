@@ -2,6 +2,47 @@
 
 /*
 ---------------------------------------------
+Functions accepting Callback Functions
+---------------------------------------------
+*/
+
+const oneWord = function (str) {
+  return str.replaceAll(' ', '').toLowerCase();
+};
+
+const upperFirstWord = function (str) {
+  const [first, ...others] = str.split(' ');
+  return [first.toUpperCase(), ...others].join(' ');
+};
+
+// because this takes in a function it's a higher order function
+const transformer = function (str, fn) {
+  console.log(str);
+  console.log(`Transformed string: ${fn(str)}`);
+  console.log(`Transformed by: ${fn.name}`);
+};
+
+// When we invoke we only pass in the fucntion we do not call it with ()
+transformer('JavaScript is the best!', upperFirstWord);
+
+transformer('JavaScript is the best!', oneWord);
+
+const high5 = function () {
+  console.log('👋');
+};
+
+document.body.addEventListener('click', high5);
+
+['Jonas', 'Martha', 'Adam'].forEach(high5);
+
+/*
+---------------------------------------------
+Functions accepting Callback Functions
+---------------------------------------------
+*/
+
+/*
+---------------------------------------------
 First-Class and Higher-Order Functions
 ---------------------------------------------
 */
