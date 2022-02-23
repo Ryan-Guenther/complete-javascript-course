@@ -186,6 +186,8 @@ Scoping in Practice
 
 */
 
+/*
+
 // Global Scoped Function
 function calcAge(birthYear) {
   // Function Scope created here
@@ -234,3 +236,45 @@ calcAge(1984);
 // Cannot access child scopes
 //console.log(age);
 //printAge();
+
+*/
+
+/*
+
+Hoisting in javascript
+makes variables accessible/usable in the code before they are declared
+"Lifted to the top of their scope"
+
+*/
+
+// Code is scanned for variable declarations and creates a new property
+
+// function declarations
+// Hoisted = True
+// Initial Value = Actual Function
+// Scope = Block
+
+// var variables
+// Hoisted = Yes
+// Initial Value = undefined // This can cause bugs
+// Scope = Function
+
+// let and const
+// Hoisted = No
+// Initial Value = <uninitialized>, TDZ (Temporal Dead Zone)
+// Scope = Block
+
+// function expressions and arrows
+// Hoisted =
+// Initial Value = Depends if using var or let/const
+// Scope =
+
+// Temporal Dead Zone, Let and Const
+
+// Region of the scope before the variable is defined, you will get ReferenceErrors if you try to access prior to definition
+// Cannot access before intialization
+// If you don't have definition the ReferenceError is is not defined
+
+// Hoisting was implemented to allow to use functions before actual declaration
+// This helps make code more variable
+// Had to work with Var to make it work at the time
