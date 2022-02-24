@@ -59,38 +59,31 @@ const poll = {
   // This generates [0, 0, 0, 0]. More in the next section!
   answers: new Array(4).fill(0),
 
-  displayResults(type) {
+  displayResults(type = 'array') {
     // If this is an array output as is
-    if (typeof type === 'object') {
-      console.log(type);
-    } else {
+    if (type === 'array') {
+      console.log(this.answers);
+    } else if (type === 'string') {
       // Output a clean result
-      console.log(
-        `Poll results are ${String([...this.answers]).replaceAll(',', ', ')}`
-      );
+      console.log(`Poll results are ${this.answers.join(', ')}`);
     }
   },
 
   registerNewAnswer() {
-    // Build the message
-    let message = `${this.question}\n`;
-    for (const option of this.options) {
-      message += `${option}\n`;
-    }
-    message += '(Write Option Number)';
+    // Build the message - use join rather than for of loop
+    let message = `${this.question}\n${this.options.join(
+      '\n'
+    )}\n(Write Option Number)`;
 
     // get the users Input
     const response = Number(prompt(message));
 
-    // Validate the input
-    if (response >= 0 && response < 4) {
-      this.answers[response]++;
-    } else {
-      console.log('Invalid answer!');
-    }
+    // Validate the input - Short circuit for simplicity
+    response >= 0 && response < this.answers.length && this.answers[response]++;
 
     // Show the results
     this.displayResults();
+    this.displayResults('string');
   },
 };
 
@@ -98,8 +91,8 @@ document
   .querySelector('.poll')
   .addEventListener('click', poll.registerNewAnswer.bind(poll));
 
-poll.displayResults([5, 2, 3]);
-poll.displayResults([1, 5, 3, 9, 6, 1]);
+poll.displayResults.call({ answers: [5, 2, 3] });
+poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] });
 
 /*
 ---------------------------------------------
