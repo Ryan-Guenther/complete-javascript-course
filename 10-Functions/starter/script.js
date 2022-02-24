@@ -60,9 +60,11 @@ const poll = {
   answers: new Array(4).fill(0),
 
   displayResults(type) {
+    // If this is an array output as is
     if (typeof type === 'object') {
       console.log(type);
     } else {
+      // Output a clean result
       console.log(
         `Poll results are ${String([...this.answers]).replaceAll(',', ', ')}`
       );
@@ -70,17 +72,24 @@ const poll = {
   },
 
   registerNewAnswer() {
+    // Build the message
     let message = `${this.question}\n`;
     for (const option of this.options) {
       message += `${option}\n`;
     }
     message += '(Write Option Number)';
+
+    // get the users Input
     const response = Number(prompt(message));
+
+    // Validate the input
     if (response >= 0 && response < 4) {
       this.answers[response]++;
     } else {
       console.log('Invalid answer!');
     }
+
+    // Show the results
     this.displayResults();
   },
 };
