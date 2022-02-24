@@ -2,9 +2,77 @@
 
 /*
 ---------------------------------------------
-Functions Returning Functions
+The call and apply methods
 ---------------------------------------------
 */
+
+const lufthansa = {
+  airline: 'Lufthansa',
+  iataCode: 'LH',
+  bookings: [],
+  book(flightNum, passengerName) {
+    console.log(
+      `${passengerName} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+    );
+    this.bookings.push({
+      flight: `${this.iataCode}${flightNum}`,
+      passengerName,
+    });
+  },
+};
+
+lufthansa.book(239, 'Ryan Guenther');
+lufthansa.book(635, 'John Smith');
+// console.log(lufthansa);
+
+// can steal the function this way
+const book = lufthansa.book;
+
+const eurowings = {
+  airline: 'Eurowings',
+  iataCode: 'EW',
+  bookings: [],
+};
+
+// This doesn't work
+// book(23, 'Sarah Williams');
+
+// When you use call you can specify the this keyword
+// Regular arguments folllow what the this keyword should be
+book.call(eurowings, 23, 'Sarah Willaims');
+console.log(eurowings);
+
+book.call(lufthansa, 239, 'Mary Cooper');
+console.log(lufthansa);
+
+const swiss = {
+  airline: 'Swiss Air Lines',
+  iataCode: 'LX',
+  bookings: [],
+};
+
+book.call(swiss, 583, 'Mary Cooper');
+
+// Apply method -- Does not receive arguments after this, instead takes array of arguments
+const flightData = [583, 'George Cooper'];
+
+book.apply(swiss, flightData);
+console.log(swiss);
+
+// you could also spread into a call rather than using apply
+book.call(swiss, ...flightData);
+
+/*
+---------------------------------------------
+The call and apply methods
+---------------------------------------------
+*/
+
+/*
+---------------------------------------------
+Functions Returning Functions
+---------------------------------------------
+
 
 // This works because of closures (covered lateron in course)
 // Greet returns a new function into the variable that can then be called
@@ -26,7 +94,7 @@ greet('Hello')('Rob');
 
 greet2('Sup')('Ryan');
 
-/*
+
 ---------------------------------------------
 Functions Returning Functions
 ---------------------------------------------
