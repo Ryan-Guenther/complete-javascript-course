@@ -2,9 +2,104 @@
 
 /*
 ---------------------------------------------
-The call and apply methods
+The bind Method
 ---------------------------------------------
 */
+
+// Bind returns a new function with the this keyword bouund
+
+const lufthansa = {
+  airline: 'Lufthansa',
+  iataCode: 'LH',
+  bookings: [],
+  book(flightNum, passengerName) {
+    console.log(
+      `${passengerName} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+    );
+    this.bookings.push({
+      flight: `${this.iataCode}${flightNum}`,
+      passengerName,
+    });
+  },
+};
+
+// can steal the function this way
+const book = lufthansa.book;
+
+const eurowings = {
+  airline: 'Eurowings',
+  iataCode: 'EW',
+  bookings: [],
+};
+
+const swiss = {
+  airline: 'Swiss Air Lines',
+  iataCode: 'LX',
+  bookings: [],
+};
+
+// Returns the book function for eurowings
+const bookEW = book.bind(eurowings);
+const bookLH = book.bind(lufthansa);
+const bookSW = book.bind(swiss);
+
+// Now can call normally
+bookEW(123, 'Ryan Guenther');
+console.log(eurowings);
+
+// you can also bind arguments to be fixed
+// Since number is preset only need to pass the name
+// This is called partial application
+const bookEW23 = book.bind(eurowings, 23);
+
+bookEW23('Ryan Guenther');
+bookEW23('Lindsey Guenther');
+
+// When you use objects with Event Listeners
+lufthansa.planes = 300;
+lufthansa.buyPlane = function () {
+  console.log(this);
+  this.planes++;
+  console.log(this.planes);
+};
+
+// Event listener takes over the this keyword so this won't work
+// Here you need to bind to the object
+// you can't use call here since call would call the funciton, bind returns a new function
+const button = document.querySelector('.buy');
+button.addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+
+// Partial application with bind
+// If we dont' care abbout this but still want to preset we can do this
+
+const addTax = (rate, value) => value + value * rate;
+console.log(addTax(0.1, 200));
+
+// Leave the bind as null when you don't care about this keyowrd
+const addGST = addTax.bind(null, 0.05);
+console.log(addGST(100));
+
+// Funciton to return a function in a similar way
+const addTax2 = function (rate) {
+  return function (value) {
+    return value + value * rate;
+  };
+};
+
+const addGST2 = addTax2(0.05);
+console.log(addGST2(100));
+
+/*
+---------------------------------------------
+The bind Method
+---------------------------------------------
+*/
+
+/*
+---------------------------------------------
+The call and apply methods
+---------------------------------------------
+
 
 const lufthansa = {
   airline: 'Lufthansa',
@@ -62,7 +157,7 @@ console.log(swiss);
 // you could also spread into a call rather than using apply
 book.call(swiss, ...flightData);
 
-/*
+
 ---------------------------------------------
 The call and apply methods
 ---------------------------------------------
