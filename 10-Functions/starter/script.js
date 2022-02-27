@@ -2,9 +2,50 @@
 
 /*
 ---------------------------------------------
-Immediatly Invoked Function Expressions
+Closures
 ---------------------------------------------
 */
+
+const secureBooking = function () {
+  // Closure is not a feature we explicitly use
+  // This happens automatically in specific situations
+  let passengerCount = 0;
+
+  // if we have two functions returned accessing the same variable they are still linked to the same
+  return [
+    function () {
+      passengerCount++;
+      console.log(`${passengerCount} passengers.`);
+    },
+    function () {
+      console.log(`${passengerCount} passengers.`);
+    },
+  ];
+};
+
+// booker still has the function remembering variables that existed when it was created
+// So it still has a unique copy of passengerCount becuase of closure
+const [booker, getBooker] = secureBooking();
+const booker2 = secureBooking();
+booker();
+booker();
+booker();
+getBooker();
+
+// you can view the closure by doing this
+console.dir(booker);
+
+/*
+---------------------------------------------
+Closures
+---------------------------------------------
+*/
+
+/*
+---------------------------------------------
+Immediatly Invoked Function Expressions
+---------------------------------------------
+
 
 // By wrapping this in () JavaScript evaluates the function as an expression
 // You need to invoke it with () after the initial () though
@@ -22,7 +63,7 @@ Immediatly Invoked Function Expressions
   const isPrivate = 23;
 }
 
-/*
+
 ---------------------------------------------
 Immediatly Invoked Function Expressions
 ---------------------------------------------
