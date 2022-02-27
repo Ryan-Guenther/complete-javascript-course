@@ -2,6 +2,34 @@
 
 /*
 ---------------------------------------------
+Immediatly Invoked Function Expressions
+---------------------------------------------
+*/
+
+// By wrapping this in () JavaScript evaluates the function as an expression
+// You need to invoke it with () after the initial () though
+// This makes it an Immediatly Invoked Function Expression (IIFE)
+(function () {
+  console.log('This will never run again');
+  const isPrivate = 23;
+})();
+
+// This also works
+(() => console.log('This will ALSO never run again'))();
+
+// To create a scope for data privacy we can use a block like this
+{
+  const isPrivate = 23;
+}
+
+/*
+---------------------------------------------
+Immediatly Invoked Function Expressions
+---------------------------------------------
+*/
+
+/*
+---------------------------------------------
 Coding Challenge #1
 Let's build a simple poll app!
 
@@ -51,7 +79,7 @@ Test data for bonus:
 Hints: Use many of the tools you learned about in this and the last section �
 GOOD LUCK
 ---------------------------------------------
-*/
+
 
 const poll = {
   question: 'What is your favourite programming language?',
@@ -94,7 +122,7 @@ document
 poll.displayResults.call({ answers: [5, 2, 3] });
 poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] });
 
-/*
+
 ---------------------------------------------
 Coding Challenge #1
 ---------------------------------------------
