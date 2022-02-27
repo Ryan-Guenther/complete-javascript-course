@@ -2,9 +2,71 @@
 
 /*
 ---------------------------------------------
-Closures
+More Closure Examples
 ---------------------------------------------
 */
+
+// Dont need to return a function from a function to create closure
+
+// Example 1
+let f;
+
+const g = function () {
+  const a = 23;
+  // f closed over a since it's in the execution context
+  // the assignment to f created the closure
+  f = function () {
+    console.log(a * 2);
+  };
+};
+
+const h = function () {
+  const b = 777;
+  f = function () {
+    console.log(b * 2);
+  };
+};
+
+g();
+f();
+console.dir(f);
+
+// reassigns f to a new function
+h();
+f();
+console.dir(f);
+
+// Example 2
+const boardPassengers = function (n, wait) {
+  const perGroup = n / 3;
+
+  // Implement a timer
+  // Takes a function and time in milliseconds
+  // This creates a closure of perGroup and n so the callback can still run
+  setTimeout(function () {
+    console.log(`We are now boarding all ${n} passengers`);
+    console.log(`There are 3 groups, each with ${perGroup} passengers.`);
+  }, wait * 1000);
+
+  // This gets logged immediatly
+  console.log(`Will start boarding in ${wait} seconds.`);
+};
+
+// This perGroup is not used because it has access to the closure perGroup, it has priority
+const perGroup = 1000;
+boardPassengers(180, 3);
+
+/*
+---------------------------------------------
+More Closure Examples
+---------------------------------------------
+*/
+
+/*
+---------------------------------------------
+Closures
+---------------------------------------------
+
 
 const secureBooking = function () {
   // Closure is not a feature we explicitly use
@@ -35,7 +97,7 @@ getBooker();
 // you can view the closure by doing this
 console.dir(booker);
 
-/*
+
 ---------------------------------------------
 Closures
 ---------------------------------------------
