@@ -74,3 +74,51 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+
+/*
+-------------------------------------------------
+Simple Array Methods
+-------------------------------------------------
+*/
+
+// arrays have built in methods we can access
+
+let arr = ['a', 'b', 'c', 'd', 'e'];
+
+// Slice begin parameter and end parameter
+console.log(arr.slice(2, 4));
+// Negative slice starts from the end
+console.log(arr.slice(-2));
+// Always gets last element
+console.log(arr.slice(-1));
+console.log(arr.slice(1, -2));
+// makes shallow copy - same as [...arr]
+console.log(arr.slice());
+
+// Splice Method, similar to Slice but changes the original array
+// console.log(arr.splice(2));
+// Removes last element -- same as pop
+arr.splice(-1);
+// This goes to position 1 and deletes 2 elemtns
+arr.splice(1, 2);
+console.log(arr);
+
+arr = ['a', 'b', 'c', 'd', 'e'];
+const arr2 = ['j', 'i', 'h', 'g', 'f'];
+// reverse does mutate the array
+console.log(arr2.reverse());
+console.log(arr2);
+
+// Concat - doesn't mutate
+const letters = arr.concat(arr2);
+console.log(letters);
+console.log([...arr, ...arr2]);
+
+// Join - doesn't mutate
+console.log(letters.join(' - '));
+
+/*
+-------------------------------------------------
+Simple Array Methods
+-------------------------------------------------
+*/
