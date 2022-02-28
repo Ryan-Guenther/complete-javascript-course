@@ -79,7 +79,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 -------------------------------------------------
 forEach with Maps and Sets
 -------------------------------------------------
-*/
+
 
 // Map
 const currencies = new Map([
@@ -101,7 +101,7 @@ currenciesUnique.forEach(function (value, _, set) {
   console.log(`${value}: ${value}`);
 });
 
-/*
+
 -------------------------------------------------
 forEach with Maps and Sets
 -------------------------------------------------
