@@ -77,9 +77,31 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /*
 -------------------------------------------------
-Simple Array Methods
+The new at Method
 -------------------------------------------------
 */
+
+const arr = [23, 11, 64];
+
+// With this we can use the array method rather than [] notation
+console.log(arr[0]);
+console.log(arr.at(0));
+
+// Get the last element of the array without knowing the length
+console.log(arr.at(-1));
+console.log(arr.at(-2));
+
+/*
+-------------------------------------------------
+The new at Method
+-------------------------------------------------
+*/
+
+/*
+-------------------------------------------------
+Simple Array Methods
+-------------------------------------------------
+
 
 // arrays have built in methods we can access
 
@@ -117,7 +139,7 @@ console.log([...arr, ...arr2]);
 // Join - doesn't mutate
 console.log(letters.join(' - '));
 
-/*
+
 -------------------------------------------------
 Simple Array Methods
 -------------------------------------------------
