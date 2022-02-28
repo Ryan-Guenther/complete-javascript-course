@@ -71,15 +71,51 @@ const currencies = new Map([
   ['GBP', 'Pound sterling'],
 ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
 /*
 -------------------------------------------------
-The new at Method
+Looping Arrays forEach
 -------------------------------------------------
 */
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// for (const movement of movements) {
+for (const [key, movement] of movements.entries()) {
+  if (movement > 0) {
+    console.log(`Movement ${key + 1}: You deposited ${movement}`);
+  } else {
+    console.log(`Movement ${key + 1}: You withdrew ${Math.abs(movement)}`);
+  }
+}
+
+console.log('--------FOREACH METHOD -----------');
+
+// callback function is invoked for each iteration of the array
+// With foreach there is the value iterated on, index and array which are optional
+// continue and break statements won't work in a foreach
+movements.forEach(function (movement, index, array) {
+  if (movement > 0) {
+    console.log(`Movement ${index + 1}: You deposited ${movement}`);
+  } else {
+    console.log(`Movement ${index + 1}: You withdrew ${Math.abs(movement)}`);
+  }
+});
+
+/*
+-------------------------------------------------
+Looping Arrays forEach
+-------------------------------------------------
+*/
+
+/*
+-------------------------------------------------
+The new at Method
+-------------------------------------------------
+
 
 const arr = [23, 11, 64];
 
@@ -91,7 +127,7 @@ console.log(arr.at(0));
 console.log(arr.at(-1));
 console.log(arr.at(-2));
 
-/*
+
 -------------------------------------------------
 The new at Method
 -------------------------------------------------
