@@ -101,6 +101,28 @@ const displayMovements = function (movements) {
 
 /*
 -------------------------------------------------
+Data Transformations map, filter, reduce
+-------------------------------------------------
+*/
+
+// map - Takes an array, loops over it and applies callback to each element
+//        Makes a new Array (Maps from existing array to new array)
+
+// filter - filters for elements that satisfy a specific condition
+//        Returns a new array with the applied filter criteria
+
+// reduce - boil down elements of an original array to one single value
+//        would make an accumulator and add the current element to it and will //
+//        keep building off that
+
+/*
+-------------------------------------------------
+Data Transformations map, filter, reduce
+-------------------------------------------------
+*/
+
+/*
+-------------------------------------------------
 Coding Challenge #1
 
 Julia and Kate are doing a study on dogs. So each of them asked 5 dog owners 
@@ -127,7 +149,7 @@ Test data:
 § Data 1: Julia's data [3, 5, 2, 12, 7], Kate's data [4, 1, 15, 8, 3]
 § Data 2: Julia's data [9, 16, 6, 8, 3], Kate's data [10, 5, 6, 1, 4]
 -------------------------------------------------
-*/
+
 const checkDogs = function (dogsJulia, dogsKate) {
   const dogsJuliaCorrected = dogsJulia.slice(1, -2);
   const allDogs = dogsJulia.concat(dogsKate);
@@ -144,7 +166,7 @@ const checkDogs = function (dogsJulia, dogsKate) {
 
 checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
 checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
-/*
+
 -------------------------------------------------
 Coding Challenge #1
 -------------------------------------------------
