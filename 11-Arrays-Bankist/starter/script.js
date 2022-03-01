@@ -101,6 +101,47 @@ const displayMovements = function (movements) {
 
 /*
 -------------------------------------------------
+Map Method
+-------------------------------------------------
+*/
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// Convert the movements to USD
+const eurToUsd = 1.1;
+
+// This could be an arrow function
+// const movementsUSD = movements.map(function (movement) {
+//   return movement * eurToUsd;
+// });
+
+// Simple arrow function callback
+const movementsUSD = movements.map(movement => movement * eurToUsd);
+
+// // Doing the same thing with for of loop
+// const movementsUSDfor = [];
+// for (const mov of movements) movementsUSDfor.push(mov * eurToUsd);
+// console.log(movementsUSDfor);
+
+console.log(movementsUSD);
+
+// Map has all three parameters (value, index, array)
+const movementsDescriptions = movements.map(
+  (mov, i) =>
+    `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(
+      mov
+    )}`
+);
+
+console.log(movementsDescriptions);
+
+/*
+-------------------------------------------------
+Map Method
+-------------------------------------------------
+*/
+
+/*
+-------------------------------------------------
 Data Transformations map, filter, reduce
 -------------------------------------------------
 */
