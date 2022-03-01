@@ -83,7 +83,22 @@ const displayMovements = function (movements) {
     containerMovements.insertAdjacentHTML('afterBegin', html);
   });
 };
-// displayMovements(account1.movements);
+
+displayMovements(account1.movements);
+
+const createUsernames = function (accs) {
+  // Doing the forEach so we trigger a SideEffect of mutating the original array
+  accs.forEach(acc => {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+  });
+};
+
+createUsernames(accounts);
+console.log(accounts);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -103,7 +118,7 @@ const displayMovements = function (movements) {
 -------------------------------------------------
 Map Method
 -------------------------------------------------
-*/
+
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // Convert the movements to USD
@@ -134,7 +149,7 @@ const movementsDescriptions = movements.map(
 
 console.log(movementsDescriptions);
 
-/*
+
 -------------------------------------------------
 Map Method
 -------------------------------------------------
