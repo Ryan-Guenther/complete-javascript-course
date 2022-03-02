@@ -149,6 +149,41 @@ createUsernames(accounts);
 
 /*
 -------------------------------------------------
+The Find Method
+Returns the first element that satisfies a comparison
+-------------------------------------------------
+*/
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const firstWithdrawal = movements.find(mov => mov < 0);
+
+console.log(firstWithdrawal);
+
+console.log(accounts);
+
+const jdAccount = accounts.find(account => account.username === 'jd');
+
+console.log(jdAccount);
+
+// Same logic using the ForOf loop
+let jdAccountForOf;
+for (const acc of accounts) {
+  if (acc.username === 'jd') {
+    jdAccountForOf = acc;
+    continue;
+  }
+}
+
+console.log(jdAccountForOf);
+
+/*
+-------------------------------------------------
+The Find Method
+-------------------------------------------------
+*/
+
+/*
+-------------------------------------------------
 Coding Challenge #3
 
 Rewrite the 'calcAverageHumanAge' function from Challenge #2, but this time 
@@ -157,7 +192,7 @@ Test data:
 § Data 1: [5, 2, 4, 1, 15, 8, 3]
 § Data 2: [16, 6, 10, 5, 6, 1, 4]
 -------------------------------------------------
-*/
+
 
 const calcAverageHumanAge = ages =>
   ages
@@ -169,7 +204,7 @@ const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
 
 console.log(avg1, avg2);
 
-/*
+
 -------------------------------------------------
 Coding Challenge #3
 -------------------------------------------------
