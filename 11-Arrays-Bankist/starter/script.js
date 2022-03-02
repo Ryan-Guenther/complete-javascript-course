@@ -86,6 +86,13 @@ const displayMovements = function (movements) {
 
 displayMovements(account1.movements);
 
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, mov) => acc + mov);
+  labelBalance.textContent = `${balance}€`;
+};
+
+calcDisplayBalance(account1.movements);
+
 const createUsernames = function (accs) {
   // Doing the forEach so we trigger a SideEffect of mutating the original array
   accs.forEach(acc => {
@@ -98,7 +105,6 @@ const createUsernames = function (accs) {
 };
 
 createUsernames(accounts);
-console.log(accounts);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -116,9 +122,42 @@ console.log(accounts);
 
 /*
 -------------------------------------------------
-Filter Method
+Reduce Method
 -------------------------------------------------
 */
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// accumulator, current value, index, array
+// need to return the new value of the accumulator
+
+// const total = movements.reduce((acc, curr, i, arr) => {
+//   console.log(`Iteration ${i}: ${acc} + ${curr}`);
+//   return acc + curr;
+//   // 0 is the starting value of the accumulator, this is optional
+// }, 0);
+
+const total = movements.reduce((acc, curr) => acc + curr);
+console.log(total);
+
+// Maximum value of the movments array using reduce
+// default value should always be first value of the array if you do this
+const max = movements.reduce(
+  (acc, curr) => (acc < curr ? curr : acc),
+  movements[0]
+);
+console.log(max);
+/*
+-------------------------------------------------
+Reduce Method
+-------------------------------------------------
+*/
+
+/*
+-------------------------------------------------
+Filter Method
+-------------------------------------------------
+
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 const deposits = movements.filter(mov => mov > 0);
@@ -132,7 +171,7 @@ console.log(depositsFor);
 const withdrawals = movements.filter(mov => mov < 0);
 console.log(withdrawals);
 
-/*
+
 -------------------------------------------------
 Filter Method
 -------------------------------------------------
