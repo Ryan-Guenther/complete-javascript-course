@@ -149,11 +149,43 @@ createUsernames(accounts);
 
 /*
 -------------------------------------------------
+Coding Challenge #3
+
+Rewrite the 'calcAverageHumanAge' function from Challenge #2, but this time 
+as an arrow function, and using chaining!
+Test data:
+§ Data 1: [5, 2, 4, 1, 15, 8, 3]
+§ Data 2: [16, 6, 10, 5, 6, 1, 4]
+-------------------------------------------------
+*/
+
+const calcAverageHumanAge = function (ages) {
+  const averageAdultAge = ages
+    .map(age => (age <= 2 ? 2 * age : 16 + age * 4))
+    .filter(age => age >= 18)
+    .reduce((acc, age, _, arr) => acc + age / arr.length, 0);
+
+  return averageAdultAge;
+};
+
+const avg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
+
+console.log(avg1, avg2);
+
+/*
+-------------------------------------------------
+Coding Challenge #3
+-------------------------------------------------
+*/
+
+/*
+-------------------------------------------------
 Chaining Methods
 As long as each method contains an array you can chain another after
 you can't chain an array after reduce cause you are left with a single value
 -------------------------------------------------
-*/
+
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 const eurToUsd = 1.1;
@@ -169,7 +201,7 @@ const totalDepositsUSD = movements
 
 console.log(totalDepositsUSD);
 
-/*
+
 -------------------------------------------------
 Chaining Methods
 -------------------------------------------------
