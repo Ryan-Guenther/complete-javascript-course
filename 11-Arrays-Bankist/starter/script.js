@@ -93,6 +93,33 @@ const calcDisplayBalance = function (movements) {
 
 calcDisplayBalance(account1.movements);
 
+const calcDisplaySummary = function (movements) {
+  const deposits = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+
+  const withdrawals = movements
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + Math.abs(mov), 0);
+
+  // Pays 1.2% interest on deposits where the interest is > 1 Euro
+  const interest = movements
+    .filter(mov => mov > 0)
+    .map(dep => dep * 0.012)
+    .filter(int => int >= 1)
+    .reduce((acc, int) => acc + int, 0);
+
+  labelSumIn.textContent = `${deposits}€`;
+  labelSumOut.textContent = `${withdrawals}€`;
+  labelSumInterest.textContent = `${interest}€`;
+};
+
+calcDisplaySummary(account1.movements);
+
+// const labelSumIn = document.querySelector('.summary__value--in');
+// const labelSumOut = document.querySelector('.summary__value--out');
+// const labelSumInterest = document.querySelector('.summary__value--interest');
+
 const createUsernames = function (accs) {
   // Doing the forEach so we trigger a SideEffect of mutating the original array
   accs.forEach(acc => {
@@ -122,6 +149,34 @@ createUsernames(accounts);
 
 /*
 -------------------------------------------------
+Chaining Methods
+As long as each method contains an array you can chain another after
+you can't chain an array after reduce cause you are left with a single value
+-------------------------------------------------
+*/
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+const eurToUsd = 1.1;
+const totalDepositsUSD = movements
+  .filter(mov => mov > 0)
+  // .map(mov => mov * eurToUsd)
+  // You can do this to debug the arrays in the chain by accessing current array in next method
+  .map((mov, i, arr) => {
+    // console.log(arr);
+    return mov * eurToUsd;
+  })
+  .reduce((acc, mov) => acc + mov, 0);
+
+console.log(totalDepositsUSD);
+
+/*
+-------------------------------------------------
+Chaining Methods
+-------------------------------------------------
+*/
+
+/*
+-------------------------------------------------
 Coding Challenge #2
 Let's go back to Julia and Kate's study about dogs. This time, they want to convert 
 dog ages to human ages and calculate the average age of the dogs in their study.
@@ -146,7 +201,7 @@ Test data:
 § Data 2: [16, 6, 10, 5, 6, 1, 4]
 
 -------------------------------------------------
-*/
+
 
 const calcAverageHumanAge = function (ages) {
   const humanAges = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4));
@@ -172,7 +227,7 @@ const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
 
 console.log(avg1, avg2);
 
-/*
+
 -------------------------------------------------
 Coding Challenge #2
 -------------------------------------------------
