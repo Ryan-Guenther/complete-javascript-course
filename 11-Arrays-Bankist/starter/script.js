@@ -149,19 +149,15 @@ Test data:
 */
 
 const calcAverageHumanAge = function (ages) {
-  const humanAges = ages
-    .map(age => {
-      if (age <= 2) {
-        return 2 * age;
-      } else {
-        return 16 + age * 4;
-      }
-    })
-    .filter(age => age >= 18);
+  const humanAges = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4));
+
   console.log(humanAges);
 
+  const adultAges = humanAges.filter(age => age >= 18);
+  console.log(adultAges);
+
   const averageAdultAge =
-    humanAges.reduce((acc, age) => acc + age, 0) / humanAges.length;
+    adultAges.reduce((acc, age) => acc + age, 0) / adultAges.length;
   console.log(averageAdultAge);
 };
 
