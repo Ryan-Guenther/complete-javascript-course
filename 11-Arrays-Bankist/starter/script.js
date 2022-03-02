@@ -84,28 +84,24 @@ const displayMovements = function (movements) {
   });
 };
 
-displayMovements(account1.movements);
-
 const calcDisplayBalance = function (movements) {
   const balance = movements.reduce((acc, mov) => acc + mov);
   labelBalance.textContent = `${balance}€`;
 };
 
-calcDisplayBalance(account1.movements);
-
-const calcDisplaySummary = function (movements) {
-  const deposits = movements
+const calcDisplaySummary = function (acc) {
+  const deposits = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
 
-  const withdrawals = movements
+  const withdrawals = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + Math.abs(mov), 0);
 
   // Pays 1.2% interest on deposits where the interest is > 1 Euro
-  const interest = movements
+  const interest = acc.movements
     .filter(mov => mov > 0)
-    .map(dep => dep * 0.012)
+    .map(dep => dep * (acc.interestRate / 100))
     .filter(int => int >= 1)
     .reduce((acc, int) => acc + int, 0);
 
@@ -113,8 +109,6 @@ const calcDisplaySummary = function (movements) {
   labelSumOut.textContent = `${withdrawals}€`;
   labelSumInterest.textContent = `${interest}€`;
 };
-
-calcDisplaySummary(account1.movements);
 
 // const labelSumIn = document.querySelector('.summary__value--in');
 // const labelSumOut = document.querySelector('.summary__value--out');
@@ -132,6 +126,41 @@ const createUsernames = function (accs) {
 };
 
 createUsernames(accounts);
+
+let currentAccount;
+
+const loginUser = function (event) {
+  // need this to prevent the default behavior of button on a form
+  event.preventDefault();
+
+  currentAccount = accounts.find(
+    acc => acc.username === inputLoginUsername.value
+  );
+
+  if (currentAccount?.pin == Number(inputLoginPin.value)) {
+    // Display UI and message
+    labelWelcome.textContent = `Welcome back, ${
+      currentAccount.owner.split(' ')[0]
+    }`;
+    containerApp.style.opacity = 100;
+
+    // Clear input fields
+    inputLoginUsername.value = inputLoginPin.value = '';
+    inputLoginPin.blur();
+    inputLoginUsername.blur();
+
+    // Display Movements
+    displayMovements(currentAccount.movements);
+
+    // Display Balance
+    calcDisplayBalance(currentAccount.movements);
+
+    // Display Summary
+    calcDisplaySummary(currentAccount);
+  }
+};
+
+btnLogin.addEventListener('click', loginUser.bind(btnLogin));
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -152,7 +181,7 @@ createUsernames(accounts);
 The Find Method
 Returns the first element that satisfies a comparison
 -------------------------------------------------
-*/
+
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 const firstWithdrawal = movements.find(mov => mov < 0);
@@ -176,7 +205,7 @@ for (const acc of accounts) {
 
 console.log(jdAccountForOf);
 
-/*
+
 -------------------------------------------------
 The Find Method
 -------------------------------------------------
