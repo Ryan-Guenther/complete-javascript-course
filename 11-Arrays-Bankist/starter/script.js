@@ -212,16 +212,48 @@ const transferFunds = function (event) {
   }
 };
 
+const logoutUser = function () {
+  // Logout the user
+  labelWelcome.textContent = 'Log in to get started';
+  containerApp.style.opacity = 0;
+  currentAccount = '';
+};
+
+///
+/// We need to remove the account from the account array
+/// UserName needs to match and PIN needs to match
+const closeAccount = function (event) {
+  event.preventDefault();
+
+  const closeUsername = inputCloseUsername.value;
+  const closePIN = Number(inputClosePin.value);
+
+  if (
+    closeUsername === currentAccount.username &&
+    closePIN === currentAccount.pin
+  ) {
+    const accIndex = accounts.findIndex(acc => acc.username === closeUsername);
+    accounts.splice(accIndex, 1);
+
+    // Empty the fields
+    inputCloseUsername.value = inputClosePin.value = '';
+
+    // Logout the user
+    logoutUser();
+  }
+};
+
 // Add Event Listeners
 btnLogin.addEventListener('click', loginUser.bind(btnLogin));
 btnTransfer.addEventListener('click', transferFunds.bind(btnTransfer));
+btnClose.addEventListener('click', closeAccount.bind(btnClose));
 
 // Call required functions
 createUsernames(accounts);
 
 // Automate login for testing
-(inputLoginUsername.value = 'js'), (inputLoginPin.value = 1111);
-loginUser();
+// (inputLoginUsername.value = 'js'), (inputLoginPin.value = 1111);
+// loginUser();
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -236,6 +268,22 @@ loginUser();
 // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+
+/*
+-------------------------------------------------
+The findIndex Method
+Returns index of the found element, not the value itself
+-------------------------------------------------
+*/
+
+// To delete something from an array ou need the index
+
+/*
+-------------------------------------------------
+The findIndex Method
+Returns index of the found element, not the value itself
+-------------------------------------------------
+*/
 
 /*
 -------------------------------------------------
