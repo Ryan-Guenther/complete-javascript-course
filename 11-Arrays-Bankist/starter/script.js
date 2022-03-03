@@ -243,10 +243,31 @@ const closeAccount = function (event) {
   }
 };
 
+/// For the loan to be approved there needs to be a deposit > 10% of the loan amount
+const requestLoan = function (event) {
+  event.preventDefault();
+
+  const loanAmount = Number(inputLoanAmount.value);
+
+  if (
+    loanAmount > 0 &&
+    currentAccount.movements
+      .filter(mov => mov > 0)
+      .some(mov => mov >= loanAmount * 0.1)
+  ) {
+    currentAccount.movements.push(loanAmount);
+    inputLoanAmount.value = '';
+    inputLoanAmount.blur();
+
+    refreshUIElements(currentAccount);
+  }
+};
+
 // Add Event Listeners
 btnLogin.addEventListener('click', loginUser.bind(btnLogin));
 btnTransfer.addEventListener('click', transferFunds.bind(btnTransfer));
 btnClose.addEventListener('click', closeAccount.bind(btnClose));
+btnLoan.addEventListener('click', requestLoan.bind(btnLoan));
 
 // Call required functions
 createUsernames(accounts);
@@ -268,6 +289,37 @@ createUsernames(accounts);
 // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+
+/*
+-------------------------------------------------
+some and every function
+-------------------------------------------------
+
+// some
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// Includes return true if any value is exaclty equal to -130
+console.log(movements.includes(-130));
+
+// If we want to test for condition we can do some
+const anyDeposits = movements.some(mov => mov > 1500);
+console.log(anyDeposits);
+
+// every
+// only returns true if all elements satisfy the condition
+console.log(account4.movements.every(mov => mov > 0));
+
+// Separate callback that we would pass into a method
+const deposit = mov => mov > 0;
+console.log(account4.movements.some(deposit));
+console.log(account4.movements.every(deposit));
+console.log(account4.movements.filter(deposit));
+
+
+-------------------------------------------------
+some and every function
+-------------------------------------------------
+*/
 
 /*
 -------------------------------------------------
