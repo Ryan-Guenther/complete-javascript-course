@@ -61,7 +61,11 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-// Receives an array of movments and Displays in the UI
+let currentAccount;
+
+///
+/// Receives an array of movements to populate in the UI
+///
 const displayMovements = function (movements) {
   // Empty the container first
   containerMovements.innerHTML = '';
@@ -84,11 +88,19 @@ const displayMovements = function (movements) {
   });
 };
 
-const calcDisplayBalance = function (movements) {
-  const balance = movements.reduce((acc, mov) => acc + mov);
+///
+/// Calculates the current balance and displays it
+/// Stores the current balance into the currentAccount
+///
+const calcDisplayBalance = function (account) {
+  const balance = account.movements.reduce((acc, mov) => acc + mov);
+  account.balance = balance;
   labelBalance.textContent = `${balance}€`;
 };
 
+///
+/// Calculates the summary of Depsoits, withdrawals and interest
+///
 const calcDisplaySummary = function (acc) {
   const deposits = acc.movements
     .filter(mov => mov > 0)
@@ -110,10 +122,9 @@ const calcDisplaySummary = function (acc) {
   labelSumInterest.textContent = `${interest}€`;
 };
 
-// const labelSumIn = document.querySelector('.summary__value--in');
-// const labelSumOut = document.querySelector('.summary__value--out');
-// const labelSumInterest = document.querySelector('.summary__value--interest');
-
+///
+/// Create Usernames for all of the accounts
+///
 const createUsernames = function (accs) {
   // Doing the forEach so we trigger a SideEffect of mutating the original array
   accs.forEach(acc => {
@@ -125,13 +136,26 @@ const createUsernames = function (accs) {
   });
 };
 
-createUsernames(accounts);
+///
+/// Refresh the UI for an account
+///
+const refreshUIElements = function (account) {
+  // Display Movements
+  displayMovements(account.movements);
 
-let currentAccount;
+  // Display Balance
+  calcDisplayBalance(account);
 
+  // Display Summary
+  calcDisplaySummary(account);
+};
+
+///
+/// Attempt to login the current user
+///
 const loginUser = function (event) {
   // need this to prevent the default behavior of button on a form
-  event.preventDefault();
+  this && event.preventDefault();
 
   currentAccount = accounts.find(
     acc => acc.username === inputLoginUsername.value
@@ -149,18 +173,55 @@ const loginUser = function (event) {
     inputLoginPin.blur();
     inputLoginUsername.blur();
 
-    // Display Movements
-    displayMovements(currentAccount.movements);
-
-    // Display Balance
-    calcDisplayBalance(currentAccount.movements);
-
-    // Display Summary
-    calcDisplaySummary(currentAccount);
+    // Refresh Transfers, Summary and Balance
+    refreshUIElements(currentAccount);
   }
 };
 
+///
+/// Transfers funds from current account to a new account
+/// Cannot send to an invalid account
+/// Cannot send a negative value
+/// Cannot send more then is in the account
+///
+const transferFunds = function (event) {
+  // Also in a form so neeed to do this to prevent refresh
+  event.preventDefault();
+  const amount = Number(inputTransferAmount.value);
+  const receiverAcc = accounts.find(
+    acc => acc.username === inputTransferTo.value
+  );
+
+  // Add the amount to the target account as well as ensure that the amount is positive and not greater than balance
+  if (
+    receiverAcc &&
+    receiverAcc?.username !== currentAccount.username &&
+    amount > 0 &&
+    amount <= currentAccount.balance
+  ) {
+    receiverAcc.movements.push(amount);
+    currentAccount.movements.push(-amount);
+
+    // Clear Inputs
+    inputTransferAmount.value = inputTransferTo.value = '';
+    inputTransferAmount.blur();
+    inputTransferTo.blur();
+
+    // Refresh Transfers, Summary and Balance
+    refreshUIElements(currentAccount);
+  }
+};
+
+// Add Event Listeners
 btnLogin.addEventListener('click', loginUser.bind(btnLogin));
+btnTransfer.addEventListener('click', transferFunds.bind(btnTransfer));
+
+// Call required functions
+createUsernames(accounts);
+
+// Automate login for testing
+(inputLoginUsername.value = 'js'), (inputLoginPin.value = 1111);
+loginUser();
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
