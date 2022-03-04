@@ -62,16 +62,20 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 let currentAccount;
+let sorted = false;
 
 ///
 /// Receives an array of movements to populate in the UI
 ///
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   // Empty the container first
   containerMovements.innerHTML = '';
 
+  // Make a shallow copy with slice so we don't mutate the original
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
   // Iterate through all the movements, getting the amount and the index
-  movements.forEach(function (mov, i) {
+  movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     // use template string to format the div the way you want
@@ -263,11 +267,18 @@ const requestLoan = function (event) {
   }
 };
 
+const sortMovements = function (event) {
+  event.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
+};
+
 // Add Event Listeners
 btnLogin.addEventListener('click', loginUser.bind(btnLogin));
 btnTransfer.addEventListener('click', transferFunds.bind(btnTransfer));
 btnClose.addEventListener('click', closeAccount.bind(btnClose));
 btnLoan.addEventListener('click', requestLoan.bind(btnLoan));
+btnSort.addEventListener('click', sortMovements.bind(btnSort));
 
 // Call required functions
 createUsernames(accounts);
@@ -292,9 +303,43 @@ createUsernames(accounts);
 
 /*
 -------------------------------------------------
-flat and flatMap
+Sorting Arrays
 -------------------------------------------------
 */
+
+// JS Built in Sort Method - this mutates owners
+const owners = ['Jonas', 'Zach', 'Adam', 'Martha', 'Ryan', 'Lindsey'];
+console.log(owners.sort());
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+console.log(movements);
+// Sort does String Sorting not Numeric Sorting
+console.log(movements.sort());
+
+// you can pass in a callback function to compare though to sort
+// current and next value are passed in
+// return < 0 then a is before b ##### a > b ? 1 : -1 (ascending)
+// return > 0 then b is before a ##### a < b ? 1 : -1 (descending)
+movements.sort((a, b) => (a > b ? 1 : -1));
+console.log(movements);
+// You can just subtract a from b if these are straight numbers, or b - a for descending
+movements.sort((a, b) => a - b);
+console.log(movements);
+
+// Don't use sort if you are dealing with mixed arrays (strings and numbers)
+
+/*
+-------------------------------------------------
+Sorting Arrays
+-------------------------------------------------
+*/
+
+/*
+-------------------------------------------------
+flat and flatMap
+-------------------------------------------------
+
 
 // flat, completely flattens a nested array one level deep only
 const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
@@ -327,7 +372,7 @@ const flatMapBalance = accounts
 
 console.log(flatMapBalance);
 
-/*
+
 -------------------------------------------------
 flat and flatMap
 -------------------------------------------------
