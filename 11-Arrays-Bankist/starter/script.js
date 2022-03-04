@@ -292,6 +292,49 @@ createUsernames(accounts);
 
 /*
 -------------------------------------------------
+flat and flatMap
+-------------------------------------------------
+*/
+
+// flat, completely flattens a nested array one level deep only
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arr.flat());
+
+// two level array won't get flattened unless you pass in the number of nesting
+const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+console.log(arrDeep.flat(2));
+
+// here we can map just account movements to a new array and then flatten them
+const accountMovmements = accounts.map(acc => acc.movements).flat();
+console.log(accountMovmements);
+
+const overallBalance = accountMovmements.reduce((acc, mov) => acc + mov, 0);
+console.log(overallBalance);
+
+// Using flat and map seperatly
+const cleanerBalance = accounts
+  .map(acc => acc.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov);
+
+console.log(cleanerBalance);
+
+// You can use flatMap as they combine flat and map
+
+const flatMapBalance = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, mov) => acc + mov, 0);
+
+console.log(flatMapBalance);
+
+/*
+-------------------------------------------------
+flat and flatMap
+-------------------------------------------------
+*/
+
+/*
+-------------------------------------------------
 some and every function
 -------------------------------------------------
 
