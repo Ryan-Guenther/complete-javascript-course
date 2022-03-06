@@ -303,9 +303,53 @@ createUsernames(accounts);
 
 /*
 -------------------------------------------------
-More ways of creating and filling arrays
+Which array method to use
 -------------------------------------------------
 */
+
+// To Mutate the original array
+// // add - push unshift
+// //  remove - pop shift splice
+// //  others - reverse sort fill
+
+// To get a new Array
+// //  compute from original - map
+// //  filter using conditioin - filter
+// // portion of original - slice
+// // add two arrays - concat
+// // flatten the original - flat flatMap
+
+// An Array index
+// // based on a value indexOf
+// // based on test findIndex
+
+// An Array element
+// // find
+
+// know if array includes
+// // based on value -  includes
+// // based on condition - some every
+
+// A new string
+// // join
+
+// To Transform to value
+// // reduce
+
+// To just loop the array
+// //forEach
+
+/*
+-------------------------------------------------
+Which array method to use
+-------------------------------------------------
+*/
+
+/*
+-------------------------------------------------
+More ways of creating and filling arrays
+-------------------------------------------------
+
 
 const arr = [1, 2, 3, 4, 5, 6, 7];
 
@@ -356,7 +400,7 @@ labelBalance.addEventListener('click', function () {
   console.log(movementsUI2);
 });
 
-/*
+
 -------------------------------------------------
 More ways of creating and filling arrays
 -------------------------------------------------
