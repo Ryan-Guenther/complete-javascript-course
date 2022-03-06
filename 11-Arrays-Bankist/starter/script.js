@@ -303,9 +303,70 @@ createUsernames(accounts);
 
 /*
 -------------------------------------------------
-Sorting Arrays
+More ways of creating and filling arrays
 -------------------------------------------------
 */
+
+const arr = [1, 2, 3, 4, 5, 6, 7];
+
+// Creates an empty array with a length of 7
+// There is only one method you can call on this empty array "fill"
+const x = new Array(7);
+console.log(x);
+
+// fill mutates the array
+// x.fill(7);
+// second parameter is the start index of the fill
+// x.fill(1, 3);
+// third paraemter is the end
+x.fill(1, 3, 5);
+
+console.log(x);
+
+arr.fill(23, 4, 6);
+console.log(arr);
+
+// Array.from can be used, you pass in an object speicfying the length, and then a callback function to fill
+const y = Array.from({ length: 7 }, () => 1);
+console.log(y);
+
+// you get access to the current elemetn and the index
+const z = Array.from({ length: 7 }, (cur, i) => i + 1);
+console.log(z);
+
+// 100 random d20 rolls
+const diceRolls = Array.from(
+  { length: 100 },
+  () => Math.trunc(Math.random() * 20) + 1
+);
+
+console.log(diceRolls);
+
+// Strings Maps and Sets are iterables so can be created to arrays using from
+// Also querySelectorAll is an iterable nodeList
+labelBalance.addEventListener('click', function () {
+  const movementsUI = Array.from(
+    document.querySelectorAll('.movements__value'),
+    element => Number(element.textContent.replace('€', ''))
+  );
+  console.log(movementsUI);
+
+  // you could spread into an array but then you won't get the mapping right away
+  const movementsUI2 = [...document.querySelectorAll('.movements__value')];
+  console.log(movementsUI2);
+});
+
+/*
+-------------------------------------------------
+More ways of creating and filling arrays
+-------------------------------------------------
+*/
+
+/*
+-------------------------------------------------
+Sorting Arrays
+-------------------------------------------------
+
 
 // JS Built in Sort Method - this mutates owners
 const owners = ['Jonas', 'Zach', 'Adam', 'Martha', 'Ryan', 'Lindsey'];
@@ -329,7 +390,7 @@ console.log(movements);
 
 // Don't use sort if you are dealing with mixed arrays (strings and numbers)
 
-/*
+
 -------------------------------------------------
 Sorting Arrays
 -------------------------------------------------
