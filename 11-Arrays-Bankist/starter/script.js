@@ -349,15 +349,6 @@ array's objects �
 -------------------------------------------------
 */
 
-const eatingOkayAmount = function (dog) {
-  if (
-    dog.curFood >= dog.recommendedFood * 0.9 &&
-    dog.curFood <= dog.recommendedFood * 1.1
-  )
-    return true;
-  return false;
-};
-
 const dogs = [
   { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
   { weight: 8, curFood: 200, owners: ['Matilda'] },
@@ -365,21 +356,22 @@ const dogs = [
   { weight: 32, curFood: 340, owners: ['Michael'] },
 ];
 
+// 1.
 // Results in grams of food based on weight in kg weightInKg ** 0.75 * 28
-dogs.forEach(dog => (dog.recommendedFood = dog.weight ** 0.75 * 28));
-
+dogs.forEach(
+  dog => (dog.recommendedFood = Math.trunc(dog.weight ** 0.75 * 28))
+);
 console.log('1:', dogs);
 
+// 2.
 const [sarahsDog] = dogs.filter(dog => dog.owners.includes('Sarah'));
+console.log(
+  `2: Sarah's dog is eating too ${
+    sarahsDog.curFood > sarahsDog.recommendedFood ? 'much' : 'little'
+  }!`
+);
 
-if (sarahsDog.curFood == sarahsDog.recommendedFood) {
-  console.log('2: Eating the right amount');
-} else if (sarahsDog.curFood >= sarahsDog.recommendedFood) {
-  console.log('2: Eating too much');
-} else if (sarahsDog.curFood < sarahsDog.recommendedFood) {
-  console.log('2: Eating too little');
-}
-
+// 3.
 const { ownersEatTooMuch, ownersEatTooLittle } = dogs.reduce(
   (acc, cur) => {
     if (cur.curFood > cur.recommendedFood)
@@ -396,6 +388,7 @@ const { ownersEatTooMuch, ownersEatTooLittle } = dogs.reduce(
 
 console.log('3:', ownersEatTooMuch, ownersEatTooLittle);
 
+// 4.
 console.log(
   `4A: ${ownersEatTooMuch.flat().join(' and ')}'s dogs eat too much!`
 );
@@ -403,29 +396,23 @@ console.log(
   `4B: ${ownersEatTooLittle.flat().join(' and ')}'s dogs eat too little!`
 );
 
+// 5.
 console.log(
   '5: Any eating the right amount',
   dogs.some(dog => dog.curFood === dog.recommendedFood)
 );
 
-console.log(
-  '6: Any eating the okay amount',
-  dogs.some(
-    dog =>
-      dog.curFood >= dog.recommendedFood * 0.9 &&
-      dog.curFood <= dog.recommendedFood * 1.1
-  )
-);
+const okayAmount = dog =>
+  dog.curFood >= dog.recommendedFood * 0.9 &&
+  dog.curFood <= dog.recommendedFood * 1.1;
 
-console.log(
-  '7: Dogs that eat an okay amount',
-  dogs.filter(
-    dog =>
-      dog.curFood >= dog.recommendedFood * 0.9 &&
-      dog.curFood <= dog.recommendedFood * 1.1
-  )
-);
+// 6.
+console.log('6: Any eating the okay amount', dogs.some(okayAmount));
 
+// 7.
+console.log('7: Dogs that eat an okay amount', dogs.filter(okayAmount));
+
+// 8.
 const sortedDogs = dogs
   .slice()
   .sort((dogA, dogB) => dogA.recommendedFood - dogB.recommendedFood);
