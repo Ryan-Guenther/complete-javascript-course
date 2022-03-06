@@ -303,6 +303,86 @@ createUsernames(accounts);
 
 /*
 -------------------------------------------------
+Array method Practice
+-------------------------------------------------
+*/
+
+// How much has been deposited in total accross all accounts
+
+const bankDepositSum = accounts
+  .flatMap(acc => acc.movements)
+  .filter(x => x > 0)
+  .reduce((acc, cur) => acc + cur);
+console.log(bankDepositSum);
+
+// Count how many deposits in the bank with at least 1000
+// const numDeposits1000 = accounts
+//   .flatMap(acc => acc.movements)
+//   .filter(x => x >= 1000).length;
+
+// get length using reduce
+const numDeposits1000 = accounts
+  .flatMap(acc => acc.movements)
+  // You have to prefix variable with ++ if you want the return value to have the incremented value
+  .reduce((acc, cur) => (cur >= 1000 ? ++acc : acc), 0);
+
+console.log(numDeposits1000);
+
+// Create a new object instead of just a number/string
+// create an object sum of deposits and sum of withdrawals
+
+// const { deposits, withdrawals } = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce(
+//     (acc, cur) => {
+//       cur > 0 ? (acc.deposits += cur) : (acc.withdrawals += cur);
+//       return acc;
+//     },
+//     { deposits: 0, withdrawals: 0 }
+//   );
+const { deposits, withdrawals } = accounts
+  .flatMap(acc => acc.movements)
+  .reduce(
+    (acc, cur) => {
+      acc[cur > 0 ? 'deposits' : 'withdrawals'] += cur;
+      return acc;
+    },
+    { deposits: 0, withdrawals: 0 }
+  );
+
+console.log(deposits, withdrawals);
+
+// Create a simple function to convert any string to Title Case, all words are capitalized except some exceptions
+// This is a nice title =>> This Is a Nice Title
+
+const convertTitleCase = function (title) {
+  const exceptions = ['a', 'an', 'the', 'but', 'or', 'on', 'in', 'with', 'and'];
+
+  const titleCase = title
+    .toLowerCase()
+    .split(' ')
+    .map((word, i) =>
+      i !== 0 && exceptions.includes(word)
+        ? word
+        : word[0].toUpperCase() + word.slice(1)
+    )
+    .join(' ');
+  return titleCase;
+};
+
+console.log(convertTitleCase('This is a nice title'));
+console.log(convertTitleCase('The quick brown fox jumped over the lazy dog'));
+console.log(convertTitleCase('This is a LONG title but not Too lONG'));
+console.log(convertTitleCase('and here is another title with an EXAMPLE'));
+
+/*
+-------------------------------------------------
+Array method Practice
+-------------------------------------------------
+*/
+
+/*
+-------------------------------------------------
 Which array method to use
 -------------------------------------------------
 */
