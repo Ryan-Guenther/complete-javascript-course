@@ -253,9 +253,36 @@ btnSort.addEventListener('click', function (e) {
 // LECTURES
 
 /////////////////////////////////////////////////
-// Math and Rounding
+// Remainder Operator
 /////////////////////////////////////////////////
 
+console.log(5 % 2); // 5 = 2 * 2 + 1 // 1 is the remainder
+console.log(8 % 3); // 8 = 2 * 3 + 2 // 2 is the remainder
+
+// Simple isEven function, my version
+const isEven = number => number % 2 === 0;
+
+console.log(isEven(2));
+console.log(isEven(3));
+console.log(isEven(315));
+console.log(isEven(4918));
+
+//  Can paint every nth row using the remainder to evaluate what row you are on
+labelBalance.addEventListener('click', () => {
+  [...document.querySelectorAll('.movements__row')].forEach(function (row, i) {
+    if (i % 2 === 0) row.style.backgroundColor = 'orangered';
+    if (i % 3 === 0) row.style.backgroundColor = 'blue';
+  });
+});
+
+/////////////////////////////////////////////////
+// Remainder Operator
+/////////////////////////////////////////////////
+
+/////////////////////////////////////////////////
+// Math and Rounding
+/////////////////////////////////////////////////
+/*
 console.log(Math.sqrt(25)); // Square Root
 console.log(25 ** (1 / 2)); // Square Root
 console.log(8 ** (1 / 3)); // Cubic Root
@@ -300,7 +327,7 @@ console.log((2.7).toFixed(0));
 console.log((2.7).toFixed(3)); // 3 decimal places
 console.log((2.345).toFixed(2));
 console.log(+(2.345).toFixed(2)); // Add a plus to convert it to a number
-
+*/
 /////////////////////////////////////////////////
 // Math and Rounding
 /////////////////////////////////////////////////
