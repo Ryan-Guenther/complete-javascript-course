@@ -253,9 +253,53 @@ btnSort.addEventListener('click', function (e) {
 // LECTURES
 
 /////////////////////////////////////////////////
-// Working with BigInts
+// Dates and Times
 /////////////////////////////////////////////////
 
+// Create a date (4 ways)
+// const now = new Date();
+// console.log(now);
+
+// console.log(new Date('Aug 02 2020 13:01:23'));
+// console.log(new Date('Dec 25 2015 00:00:00'));
+// console.log(new Date(account1.movementsDates[0]));
+
+// // Year, Month, Day, Hour, Minute, Second // Month is 0 based here
+// console.log(new Date(2037, 10, 19, 15, 23, 5));
+// console.log(new Date(2037, 10, 33)); // using the date like this will roll over extra days into next month
+
+// // get UNIX Time Start Dec 31 1969
+// console.log(new Date(0));
+// // 3 days * 24 hours * 60 minutes * 60 seconds * 1000 milliseconds 3 days after unix time start
+// console.log(new Date(3 * 24 * 60 * 60 * 1000));
+
+// Working with Dates
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(future);
+console.log(future.getFullYear());
+console.log(future.getMonth()); // 0 Based Month
+console.log(future.getDate()); // returns the Day #
+console.log(future.getDay()); // Day of the week
+console.log(future.getHours());
+console.log(future.getMinutes());
+console.log(future.getSeconds());
+console.log(future.toISOString()); // gives into UTC time so you can store safely
+console.log(future.getTime()); // UNIX Time milliseconds since Jan 1 1970
+
+console.log(Date.now()); // current time
+
+// Can mutate the year directly using this
+future.setFullYear(2040); // also have the setters for all the other values and do autocorection
+console.log(future);
+
+/////////////////////////////////////////////////
+// Dates and Times
+/////////////////////////////////////////////////
+
+/////////////////////////////////////////////////
+// Working with BigInts
+/////////////////////////////////////////////////
+/*
 // Biggest number JS can represent
 console.log(2 ** 53 - 1); // 9007199254740991
 console.log(Number.MAX_SAFE_INTEGER); // 9007199254740991
@@ -294,7 +338,7 @@ console.log(huge + ' is REALLY big!!!');
 // Divisions
 console.log(10n / 3n); // returns 3 , closest bigInt
 console.log(10n % 3n); // returns 1 the remainder
-
+*/
 /////////////////////////////////////////////////
 // Working with BigInts
 /////////////////////////////////////////////////
