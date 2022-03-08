@@ -81,19 +81,23 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // Functions
 
-const displayMovements = function (movements, sort = false) {
+const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = '';
 
-  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+  const movs = sort
+    ? acc.movements.slice().sort((a, b) => a - b)
+    : acc.movements;
 
   movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
+    const displayDate = new Date(acc.movementsDates[i]);
 
     const html = `
       <div class="movements__row">
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
+        <div class="movements__date">${formatDate(displayDate)}</div>
         <div class="movements__value">${mov.toFixed(2)}€</div>
       </div>
     `;
@@ -105,6 +109,8 @@ const displayMovements = function (movements, sort = false) {
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
   labelBalance.textContent = `${acc.balance.toFixed(2)}€`;
+  // Time at time of update
+  labelDate.textContent = formatDateTime();
 };
 
 const calcDisplaySummary = function (acc) {
@@ -142,7 +148,7 @@ createUsernames(accounts);
 
 const updateUI = function (acc) {
   // Display movements
-  displayMovements(acc.movements);
+  displayMovements(acc);
 
   // Display balance
   calcDisplayBalance(acc);
@@ -151,9 +157,32 @@ const updateUI = function (acc) {
   calcDisplaySummary(acc);
 };
 
+const formatDateTime = function (dt = new Date()) {
+  const year = dt.getFullYear();
+  const month = `${dt.getMonth() + 1}`.padStart(2, 0);
+  const day = `${dt.getDate() + 1}`.padStart(2, 0);
+  const hour = `${dt.getHours() + 1}`.padStart(2, 0);
+  const minutes = `${dt.getMinutes() + 1}`.padStart(2, 0);
+
+  return `${year}/${month}/${day} ${hour}:${minutes}`;
+};
+
+const formatDate = function (dt = new Date()) {
+  const year = dt.getFullYear();
+  const month = `${dt.getMonth() + 1}`.padStart(2, 0);
+  const day = `${dt.getDate() + 1}`.padStart(2, 0);
+
+  return `${year}/${month}/${day}`;
+};
+
 ///////////////////////////////////////
 // Event handlers
 let currentAccount;
+
+// Fake Always Logged in
+currentAccount = account1;
+updateUI(currentAccount);
+containerApp.style.opacity = 100;
 
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
@@ -196,7 +225,9 @@ btnTransfer.addEventListener('click', function (e) {
   ) {
     // Doing the transfer
     currentAccount.movements.push(-amount);
+    currentAccount.movementsDates.push(new Date().toISOString());
     receiverAcc.movements.push(amount);
+    receiverAcc.movementsDates.push(new Date().toISOString());
 
     // Update UI
     updateUI(currentAccount);
@@ -211,6 +242,7 @@ btnLoan.addEventListener('click', function (e) {
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     // Add movement
     currentAccount.movements.push(amount);
+    currentAccount.movementsDates.push(new Date().toISOString());
 
     // Update UI
     updateUI(currentAccount);
@@ -244,7 +276,7 @@ btnClose.addEventListener('click', function (e) {
 let sorted = false;
 btnSort.addEventListener('click', function (e) {
   e.preventDefault();
-  displayMovements(currentAccount.movements, !sorted);
+  displayMovements(currentAccount, !sorted);
   sorted = !sorted;
 });
 
@@ -255,7 +287,7 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 // Dates and Times
 /////////////////////////////////////////////////
-
+/*
 // Create a date (4 ways)
 // const now = new Date();
 // console.log(now);
@@ -291,7 +323,7 @@ console.log(Date.now()); // current time
 // Can mutate the year directly using this
 future.setFullYear(2040); // also have the setters for all the other values and do autocorection
 console.log(future);
-
+*/
 /////////////////////////////////////////////////
 // Dates and Times
 /////////////////////////////////////////////////
