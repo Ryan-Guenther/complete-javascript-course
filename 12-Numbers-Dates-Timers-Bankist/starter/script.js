@@ -164,7 +164,7 @@ btnLogin.addEventListener('click', function (e) {
   );
   console.log(currentAccount);
 
-  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+  if (currentAccount?.pin === +inputLoginPin.value) {
     // Display UI and message
     labelWelcome.textContent = `Welcome back, ${
       currentAccount.owner.split(' ')[0]
@@ -182,7 +182,7 @@ btnLogin.addEventListener('click', function (e) {
 
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
-  const amount = Number(inputTransferAmount.value);
+  const amount = +inputTransferAmount.value;
   const receiverAcc = accounts.find(
     acc => acc.username === inputTransferTo.value
   );
@@ -206,7 +206,7 @@ btnTransfer.addEventListener('click', function (e) {
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
 
-  const amount = Number(inputLoanAmount.value);
+  const amount = +inputLoanAmount.value;
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     // Add movement
@@ -223,7 +223,7 @@ btnClose.addEventListener('click', function (e) {
 
   if (
     inputCloseUsername.value === currentAccount.username &&
-    Number(inputClosePin.value) === currentAccount.pin
+    +inputClosePin.value === currentAccount.pin
   ) {
     const index = accounts.findIndex(
       acc => acc.username === currentAccount.username
@@ -251,3 +251,53 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+
+/////////////////////////////////////////////////
+// Converting and Checking Numbers
+/////////////////////////////////////////////////
+
+// numbers are stored in binary form and are all decimals
+console.log(23 === 23.0);
+
+// Base 10 - 0 to 9
+// Binary base 2 - 0 1 (JavaScript)
+// Cannot do scientific calculations in JavaScript
+console.log(0.1 + 0.2);
+console.log(3 / 10);
+
+// This should be true but will never be true in JavaScript
+console.log(0.1 + 0.2 === 0.3);
+
+// Both of these will convert to a Number by doing type coercison
+console.log(Number('23'));
+console.log(+'23');
+
+// We can also parse a number from a string
+// You can have combination text/numbers and it will parse it as long as it starts with a number
+console.log(Number.parseInt('30psi', 10));
+// Doesn't work
+console.log(Number.parseInt('psi345'));
+
+// You can also parse a float
+console.log(Number.parseFloat('2.5rem'));
+// console.log(Number.parseInt('2.5rem')); this stops at the decimal since it's an int
+
+console.log(Number.isNaN(20)); // False
+console.log(Number.isNaN('20')); // False
+console.log(Number.isNaN(+'20x')); // This is the only case that returns NaN that would return true
+console.log(Number.isNaN(23 / 0)); // It won't consider Infinite values 23/0
+
+// isFinite is a better way to see if you have a number
+console.log(Number.isFinite(20)); // True
+console.log(Number.isFinite('20')); // False
+console.log(Number.isFinite(+'20x')); // False
+console.log(Number.isFinite(23 / 0)); // False
+
+// Check if you have an integer
+console.log(Number.isInteger(23)); // True
+console.log(Number.isInteger(23.0)); // True
+console.log(Number.isInteger(23 / 0)); // False
+
+/////////////////////////////////////////////////
+// Converting and Checking Numbers
+/////////////////////////////////////////////////
