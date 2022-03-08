@@ -253,9 +253,35 @@ btnSort.addEventListener('click', function (e) {
 // LECTURES
 
 /////////////////////////////////////////////////
-// Remainder Operator
+// Numeric Separators
 /////////////////////////////////////////////////
 
+// We usually use 1000 separator , to read this 287,460,000,000
+// We can insert _ in place of the comma in our code, JS will interpret
+const diameter = 287_460_000_000;
+console.log(diameter);
+
+const priceCents = 345_99;
+console.log(priceCents);
+
+const transferFee1 = 15_00;
+const transferFee2 = 1_500;
+
+// Underscore has to be between numbers, not beginning, end or beside decimal
+const PI = 3.1415;
+console.log(PI);
+
+// Doesn't work if you use type coersion
+console.log(Number('4_000'));
+console.log(parseInt('230_142')); // ignores everything passed the _
+/////////////////////////////////////////////////
+// Numeric Separators
+/////////////////////////////////////////////////
+
+/////////////////////////////////////////////////
+// Remainder Operator
+/////////////////////////////////////////////////
+/*
 console.log(5 % 2); // 5 = 2 * 2 + 1 // 1 is the remainder
 console.log(8 % 3); // 8 = 2 * 3 + 2 // 2 is the remainder
 
@@ -274,7 +300,7 @@ labelBalance.addEventListener('click', () => {
     if (i % 3 === 0) row.style.backgroundColor = 'blue';
   });
 });
-
+*/
 /////////////////////////////////////////////////
 // Remainder Operator
 /////////////////////////////////////////////////
