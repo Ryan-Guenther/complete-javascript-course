@@ -253,9 +253,56 @@ btnSort.addEventListener('click', function (e) {
 // LECTURES
 
 /////////////////////////////////////////////////
-// Numeric Separators
+// Working with BigInts
 /////////////////////////////////////////////////
 
+// Biggest number JS can represent
+console.log(2 ** 53 - 1); // 9007199254740991
+console.log(Number.MAX_SAFE_INTEGER); // 9007199254740991
+
+// the output is wrong as you add up beyond this
+console.log(2 ** 53 + 9); // 9007199254741000
+console.log(2 ** 53 + 10); // 9007199254741002
+console.log(2 ** 53 + 11); // 9007199254741004
+console.log(2 ** 53 + 12); // 9007199254741004
+
+// now we have bigInt to work with these larger numbers
+// adding n to the end of the number casts it as a bigInt
+console.log(54654648484234243545343543543543543545n);
+// This seems to not work as expected, still need to pass n with big numbers
+console.log(BigInt(54654648484234243545343543543543543545n));
+
+// Operations
+console.log(10000n + 10000n);
+console.log(5634654654354021351051608486165121n + 9n);
+
+// no type mixing.  you would need to convert the other number to a bigInt
+// console.log(5634654654354021351051608486165121n + 9);
+
+// can do comparison operators
+console.log(20n > 15);
+
+// but not === as the types are different
+console.log(20n === 20);
+console.log(typeof 20n, typeof 20);
+// This would handle the type coersion
+console.log(20n == 20);
+
+const huge = 51654654654646846846878765451231651651n;
+console.log(huge + ' is REALLY big!!!');
+
+// Divisions
+console.log(10n / 3n); // returns 3 , closest bigInt
+console.log(10n % 3n); // returns 1 the remainder
+
+/////////////////////////////////////////////////
+// Working with BigInts
+/////////////////////////////////////////////////
+
+/////////////////////////////////////////////////
+// Numeric Separators
+/////////////////////////////////////////////////
+/*
 // We usually use 1000 separator , to read this 287,460,000,000
 // We can insert _ in place of the comma in our code, JS will interpret
 const diameter = 287_460_000_000;
@@ -274,6 +321,7 @@ console.log(PI);
 // Doesn't work if you use type coersion
 console.log(Number('4_000'));
 console.log(parseInt('230_142')); // ignores everything passed the _
+*/
 /////////////////////////////////////////////////
 // Numeric Separators
 /////////////////////////////////////////////////
