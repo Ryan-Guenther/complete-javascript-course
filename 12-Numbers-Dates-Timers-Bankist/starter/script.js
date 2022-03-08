@@ -22,8 +22,8 @@ const account1 = {
     '2020-04-01T10:17:24.185Z',
     '2020-05-08T14:11:59.604Z',
     '2020-05-27T17:01:17.194Z',
-    '2020-07-11T23:36:17.929Z',
-    '2020-07-12T10:51:36.790Z',
+    '2022-03-04T23:36:17.929Z',
+    '2022-03-07T10:51:36.790Z',
   ],
   currency: 'EUR',
   locale: 'pt-PT', // de-DE
@@ -97,7 +97,7 @@ const displayMovements = function (acc, sort = false) {
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-        <div class="movements__date">${formatDate(displayDate)}</div>
+        <div class="movements__date">${formatMovementDate(displayDate)}</div>
         <div class="movements__value">${mov.toFixed(2)}€</div>
       </div>
     `;
@@ -173,6 +173,19 @@ const formatDate = function (dt = new Date()) {
   const day = `${dt.getDate() + 1}`.padStart(2, 0);
 
   return `${year}/${month}/${day}`;
+};
+
+const calcDaysPassed = (date1, date2) =>
+  // 1000 ms per Second, 60 Seconds per Minute 60 Minutes per Hour 24 Hours per day
+  // absolute means the ordering of the date doesn't matter
+  Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
+
+const formatMovementDate = function (dt) {
+  const daysBetween = calcDaysPassed(dt, new Date());
+  if (daysBetween === 0) return 'Today';
+  if (daysBetween === 1) return 'Yesterday';
+  if (daysBetween <= 7) return `${daysBetween} days ago`;
+  return formatDate(dt);
 };
 
 ///////////////////////////////////////
@@ -283,6 +296,29 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+
+/////////////////////////////////////////////////
+// Operations with dates
+/////////////////////////////////////////////////
+
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(+future); // + converts it to a number in milliseconds
+
+// Redeclared above leaving here from lecture
+// const calcDaysPassed = (date1, date2) =>
+//   // 1000 ms per Second, 60 Seconds per Minute 60 Minutes per Hour 24 Hours per day
+//   // absolute means the ordering of the date doesn't matter
+//   Math.abs(date2 - date1) / (1000 * 60 * 60 * 24);
+
+const a = new Date('2022-03-08');
+const b = new Date('2022-03-01');
+
+console.log(calcDaysPassed(a, b));
+console.log(calcDaysPassed(b, a));
+
+/////////////////////////////////////////////////
+// Operations with dates
+/////////////////////////////////////////////////
 
 /////////////////////////////////////////////////
 // Dates and Times
