@@ -110,7 +110,7 @@ const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
   labelBalance.textContent = `${acc.balance.toFixed(2)}€`;
   // Time at time of update
-  labelDate.textContent = formatDateTime();
+  labelDate.textContent = formatDateTime(Date.now(), acc.locale);
 };
 
 const calcDisplaySummary = function (acc) {
@@ -157,22 +157,30 @@ const updateUI = function (acc) {
   calcDisplaySummary(acc);
 };
 
-const formatDateTime = function (dt = new Date()) {
-  const year = dt.getFullYear();
-  const month = `${dt.getMonth() + 1}`.padStart(2, 0);
-  const day = `${dt.getDate() + 1}`.padStart(2, 0);
-  const hour = `${dt.getHours() + 1}`.padStart(2, 0);
-  const minutes = `${dt.getMinutes() + 1}`.padStart(2, 0);
+const formatDateTime = function (dt = new Date(), locale = navigator.Language) {
+  // Experementing with the API
+  // const locale = navigator.language;
 
-  return `${year}/${month}/${day} ${hour}:${minutes}`;
+  // Optional Options that can be passed into the International DateTime API
+  const options = {
+    hour: 'numeric',
+    minute: 'numeric',
+    year: 'numeric',
+    month: 'long',
+    // month: '2-digit',
+    // month: 'numeric',
+    day: 'numeric',
+    weekday: 'long', // Short or Numeric also valid
+  };
+  // en-US formats as mm/dd/yyyy
+  // en-GB formats dd/mm/yyyy
+  return new Intl.DateTimeFormat(locale, options).format(dt);
 };
 
-const formatDate = function (dt = new Date()) {
-  const year = dt.getFullYear();
-  const month = `${dt.getMonth() + 1}`.padStart(2, 0);
-  const day = `${dt.getDate() + 1}`.padStart(2, 0);
+const formatDate = function (dt = new Date(), locale = navigator.Language) {
+  locale = currentAccount?.locale;
 
-  return `${year}/${month}/${day}`;
+  return new Intl.DateTimeFormat(locale).format(dt);
 };
 
 const calcDaysPassed = (date1, date2) =>
@@ -204,7 +212,6 @@ btnLogin.addEventListener('click', function (e) {
   currentAccount = accounts.find(
     acc => acc.username === inputLoginUsername.value
   );
-  console.log(currentAccount);
 
   if (currentAccount?.pin === +inputLoginPin.value) {
     // Display UI and message
@@ -273,7 +280,7 @@ btnClose.addEventListener('click', function (e) {
     const index = accounts.findIndex(
       acc => acc.username === currentAccount.username
     );
-    console.log(index);
+    // console.log(index);
     // .indexOf(23)
 
     // Delete account
@@ -300,7 +307,7 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 // Operations with dates
 /////////////////////////////////////////////////
-
+/*
 const future = new Date(2037, 10, 19, 15, 23);
 console.log(+future); // + converts it to a number in milliseconds
 
@@ -315,7 +322,7 @@ const b = new Date('2022-03-01');
 
 console.log(calcDaysPassed(a, b));
 console.log(calcDaysPassed(b, a));
-
+*/
 /////////////////////////////////////////////////
 // Operations with dates
 /////////////////////////////////////////////////
