@@ -81,6 +81,16 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // Functions
 
+const formatCur = function (amount, locale, currency) {
+  // Setup the currency Options
+  const options = {
+    style: 'currency',
+    currency: currency,
+  };
+
+  return new Intl.NumberFormat(locale, options).format(amount.toFixed(2));
+};
+
 const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = '';
 
@@ -98,7 +108,11 @@ const displayMovements = function (acc, sort = false) {
       i + 1
     } ${type}</div>
         <div class="movements__date">${formatMovementDate(displayDate)}</div>
-        <div class="movements__value">${mov.toFixed(2)}€</div>
+        <div class="movements__value">${formatCur(
+          mov,
+          acc.locale,
+          acc.currency
+        )}</div>
       </div>
     `;
 
@@ -108,7 +122,11 @@ const displayMovements = function (acc, sort = false) {
 
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${acc.balance.toFixed(2)}€`;
+  labelBalance.textContent = `${formatCur(
+    acc.balance,
+    acc.locale,
+    acc.currency
+  )}`;
   // Time at time of update
   labelDate.textContent = formatDateTime(Date.now(), acc.locale);
 };
@@ -117,12 +135,16 @@ const calcDisplaySummary = function (acc) {
   const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${incomes.toFixed(2)}€`;
+  labelSumIn.textContent = `${formatCur(incomes, acc.locale, acc.currency)}`;
 
   const out = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `${Math.abs(out.toFixed(2))}€`;
+  labelSumOut.textContent = `${formatCur(
+    Math.abs(out),
+    acc.locale,
+    acc.currency
+  )}`;
 
   const interest = acc.movements
     .filter(mov => mov > 0)
@@ -132,7 +154,11 @@ const calcDisplaySummary = function (acc) {
       return int >= 1;
     })
     .reduce((acc, int) => acc + int, 0);
-  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
+  labelSumInterest.textContent = `${formatCur(
+    interest,
+    acc.locale,
+    acc.currency
+  )}`;
 };
 
 const createUsernames = function (accs) {
@@ -166,11 +192,11 @@ const formatDateTime = function (dt = new Date(), locale = navigator.Language) {
     hour: 'numeric',
     minute: 'numeric',
     year: 'numeric',
-    month: 'long',
-    // month: '2-digit',
+    // month: 'long',
+    month: '2-digit',
     // month: 'numeric',
     day: 'numeric',
-    weekday: 'long', // Short or Numeric also valid
+    // weekday: 'long', // Short or Numeric also valid
   };
   // en-US formats as mm/dd/yyyy
   // en-GB formats dd/mm/yyyy
@@ -303,6 +329,36 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+
+/////////////////////////////////////////////////
+// International Numbers (INTL)
+/////////////////////////////////////////////////
+/*
+const num = 3884764.23;
+
+const options = {
+  // for currency set style to currency and have to define the currency
+  style: 'currency',
+  currency: 'EUR',
+  // Percent ignores the other units
+  // style: 'percent',
+  // style: 'unit',
+  // unit: 'mile-per-hour',
+  unit: 'celsius',
+};
+
+console.log('US:', new Intl.NumberFormat('en-US', options).format(num));
+console.log('Germany:', new Intl.NumberFormat('de-DE', options).format(num));
+console.log('Syria:', new Intl.NumberFormat('ar-SY', options).format(num));
+console.log(
+  'Browser:',
+  new Intl.NumberFormat(navigator.language, options).format(num)
+);
+
+*/
+/////////////////////////////////////////////////
+// International Numbers (INTL)
+/////////////////////////////////////////////////
 
 /////////////////////////////////////////////////
 // Operations with dates
