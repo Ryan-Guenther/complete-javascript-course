@@ -285,14 +285,21 @@ btnLoan.addEventListener('click', function (e) {
 
   const amount = Math.floor(inputLoanAmount.value);
 
-  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
-    // Add movement
-    currentAccount.movements.push(amount);
-    currentAccount.movementsDates.push(new Date().toISOString());
+  // Adding artificial delay into the setTimeout
+  setTimeout(function () {
+    if (
+      amount > 0 &&
+      currentAccount.movements.some(mov => mov >= amount * 0.1)
+    ) {
+      // Add movement
+      currentAccount.movements.push(amount);
+      currentAccount.movementsDates.push(new Date().toISOString());
 
-    // Update UI
-    updateUI(currentAccount);
-  }
+      // Update UI
+      updateUI(currentAccount);
+    }
+  }, 2500);
+
   inputLoanAmount.value = '';
 });
 
@@ -329,6 +336,58 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+
+/////////////////////////////////////////////////
+// Timers setTimeout and setInterval
+/////////////////////////////////////////////////
+/*
+// setTimeout uses a callback function
+// pass in function and time in millseconds
+setTimeout(() => {
+  console.log('Here is your pizza🍕');
+}, 3000);
+
+// The code keeps executing, this will still be fired immediatly
+console.log('Waiting for pizza...');
+
+// any values after the timeout will be passed in to the callback function
+setTimeout(
+  (ingredient1, ingredient2) => {
+    console.log(`Here is your pizza with ${ingredient1} and ${ingredient2}🍕`);
+  },
+  3000,
+  'olives',
+  'spinach'
+);
+
+const ingredients = ['olives', 'spinach'];
+
+const pizzaTimer = setTimeout(
+  ([ingredient1, ingredient2]) => {
+    console.log(`Here is your pizza with ${ingredient1} and ${ingredient2}🍕`);
+  },
+  3000,
+  ingredients
+);
+
+if (ingredients.includes('spinach')) clearTimeout(pizzaTimer);
+
+// setInterval to have a function constantly repeat by a specific interval
+setInterval(function () {
+  const now = new Date();
+
+  const options = {
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+  };
+
+  console.log(new Intl.DateTimeFormat(navigator.language, options).format(now));
+}, 1000);
+*/
+/////////////////////////////////////////////////
+// Timers setTimeout and setInterval
+/////////////////////////////////////////////////
 
 /////////////////////////////////////////////////
 // International Numbers (INTL)
