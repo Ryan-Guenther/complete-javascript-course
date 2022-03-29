@@ -94,7 +94,7 @@ document.querySelector('.btn--close-cookie').addEventListener('click', () => {
 ///////////////////////////////////////
 /* Styles Attributes and Classes */
 ///////////////////////////////////////
-
+/*
 // Styles
 message.style.backgroundColor = '#37383d';
 message.style.width = '120%';
@@ -149,7 +149,38 @@ logo.classList.contains('test'); // not includes
 
 // This will replace all existing classes and limits you to a single class
 // logo.className = 'jonas';
-
+*/
 ///////////////////////////////////////
 /* Styles Attributes and Classes */
 ///////////////////////////////////////
+
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', function (e) {
+  // get the coords of where we are scrolling to
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
+
+  console.log('Current scroll (X/Y)', window.scrollX, scrollY);
+
+  console.log(
+    'height/width viewport',
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth
+  );
+
+  // Scrolling, need to pass the left and top of element to scrollto
+  // Should ensure to always add the current scroll position to make sure you are accounting for that
+  // window.scrollTo(s1coords.left + scrollX, s1coords.top + scrollY);
+
+  // Using this as an object we can do a nice smooth scroll effect
+  // window.scrollTo({
+  //   left: s1coords.left + scrollX,
+  //   top: s1coords.top + scrollY,
+  //   behavior: 'smooth',
+  // });
+
+  // More modern way using just an element and passing in the object
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
