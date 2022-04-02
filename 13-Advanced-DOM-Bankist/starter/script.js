@@ -184,3 +184,24 @@ btnScrollTo.addEventListener('click', function (e) {
   // More modern way using just an element and passing in the object
   section1.scrollIntoView({ behavior: 'smooth' });
 });
+
+const h1 = document.querySelector('h1');
+
+const alertH1 = function (e) {
+  alert('addEventListener: Great! You are reading the heading! :)');
+
+  // This will remove the listener, but we need to have exported function into a variable
+  h1.removeEventListener('mouseenter', alertH1);
+};
+
+// fires when mouse enters the element
+h1.addEventListener('mouseenter', alertH1);
+
+// This removes it after 3 seconds
+setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
+
+// can also be done in this fashion (older method)
+// with this you can only have one function on the listener, vs using the addEventListener
+// h1.onmouseenter = function (e) {
+//   alert('addEventListener: Great! You are reading the heading! :)');
+// };
