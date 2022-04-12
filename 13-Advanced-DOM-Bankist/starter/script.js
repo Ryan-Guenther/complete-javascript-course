@@ -217,7 +217,9 @@ logo.classList.contains('test'); // not includes
 /* Styles Attributes and Classes */
 ///////////////////////////////////////
 
-// MouseEnter Event
+///////////////////////////////////////
+/* MouseEnter Event */
+///////////////////////////////////////
 /*
 
 const h1 = document.querySelector('h1');
@@ -241,10 +243,13 @@ setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
 //   alert('addEventListener: Great! You are reading the heading! :)');
 // };
 */
+///////////////////////////////////////
+/* MouseEnter Event */
+///////////////////////////////////////
 
-/*
-Event Propogation in pratice
-*/
+///////////////////////////////////////
+/* Event Propogation in pratice */
+///////////////////////////////////////
 
 /*
 // Generate a random color in this format
@@ -282,3 +287,51 @@ document.querySelector('.nav').addEventListener(
   // ,true
 );
 */
+
+///////////////////////////////////////
+/* Event Propogation in pratice */
+///////////////////////////////////////
+
+///////////////////////////////////////
+/* DOM Traversing */
+///////////////////////////////////////
+
+const h1 = document.querySelector('h1');
+
+// Going downwards: child
+console.log(h1.querySelectorAll('.highlight'));
+// This returns all the child nodes of the element
+console.log(h1.childNodes);
+// Here we get the actual HTMLCollection **Only direct children
+console.log(h1.children);
+h1.firstElementChild.style.color = 'white';
+h1.lastElementChild.style.color = 'orangered';
+
+// Going upwards: parents
+console.log(h1.parentNode); // Similar to childNodes
+console.log(h1.parentElement);
+
+// grabs closest parent element with the class .header
+h1.closest('.header').style.background = 'var(--gradient-secondary)';
+
+h1.closest('h1').style.background = 'var(--gradient-primary)';
+
+// Going sideways: siblings
+// in JS you can only access direct siblings
+console.log(h1.previousElementSibling);
+console.log(h1.nextElementSibling);
+
+console.log(h1.previousSibling);
+console.log(h1.nextSibling);
+
+// Or you can go up to the parent element and get all the children
+console.log(h1.parentElement.children);
+[...h1.parentElement.children].forEach(function (el) {
+  if (el !== h1) {
+    el.style.transform = 'scale(0.75)';
+  }
+});
+
+///////////////////////////////////////
+/* DOM Traversing */
+///////////////////////////////////////
