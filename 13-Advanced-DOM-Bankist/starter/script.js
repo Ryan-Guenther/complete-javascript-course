@@ -94,6 +94,33 @@ document.querySelector('.nav__links').addEventListener('click', function (el) {
 });
 
 ///////////////////////////////////////
+// Tabbed Component
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+
+tabsContainer.addEventListener('click', function (el) {
+  // finds the closest element that has the class
+  // when no parent we get a null
+  const clicked = el.target.closest('.operations__tab');
+
+  // Adds a guard clause to escape if the condition hits and nothing was clicked
+  if (!clicked) return;
+
+  // deactivate current tab
+  tabs.forEach(tab => tab.classList.remove('operations__tab--active'));
+  tabsContent.forEach(content =>
+    content.classList.remove('operations__content--active')
+  );
+
+  // Set the new tab active
+  clicked.classList.add('operations__tab--active');
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add('operations__content--active');
+});
+
+///////////////////////////////////////
 /* Selecting Creating and Deleting Elements */
 ///////////////////////////////////////
 
@@ -295,7 +322,7 @@ document.querySelector('.nav').addEventListener(
 ///////////////////////////////////////
 /* DOM Traversing */
 ///////////////////////////////////////
-
+/*
 const h1 = document.querySelector('h1');
 
 // Going downwards: child
@@ -331,7 +358,7 @@ console.log(h1.parentElement.children);
     el.style.transform = 'scale(0.75)';
   }
 });
-
+*/
 ///////////////////////////////////////
 /* DOM Traversing */
 ///////////////////////////////////////
