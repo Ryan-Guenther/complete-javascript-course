@@ -185,6 +185,9 @@ btnScrollTo.addEventListener('click', function (e) {
   section1.scrollIntoView({ behavior: 'smooth' });
 });
 
+// MouseEnter Event
+/*
+
 const h1 = document.querySelector('h1');
 
 const alertH1 = function (e) {
@@ -205,3 +208,43 @@ setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
 // h1.onmouseenter = function (e) {
 //   alert('addEventListener: Great! You are reading the heading! :)');
 // };
+*/
+
+/*
+Event Propogation in pratice
+*/
+
+// Generate a random color in this format
+// rgb(255,255,255)
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
+
+const randomColor = () =>
+  `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
+
+// With this we can see the clicks bubble up, so the .nav fires first, then .nav__links then .nav__link
+// In this case it fires in all the elements that are listening to it
+// event.target is where the event triggered, .currentTarget is the place the event is firing from
+// currentTarget is the same as the this, target is only going to be the same on the specific one
+// Event propgation can be stopped as well event.stopPropagation()
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('LINK', e.target, e.currentTarget);
+  // Stops the event propogation to other elements, but not a good practice
+  // e.stopPropagation();
+});
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('CONTAINER', e.target, e.currentTarget);
+});
+
+document.querySelector('.nav').addEventListener(
+  'click',
+  function (e) {
+    this.style.backgroundColor = randomColor();
+    console.log('NAV', e.target, e.currentTarget);
+  }
+  // Third parameter will define that they will happen on the capture phase (first) (defaults to false)
+  // ,true
+);
