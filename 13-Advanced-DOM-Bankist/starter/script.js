@@ -7,6 +7,8 @@ const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
 
 const openModal = function (e) {
   e.preventDefault();
@@ -27,6 +29,67 @@ overlay.addEventListener('click', closeModal);
 document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
     closeModal();
+  }
+});
+
+///////////////////////////////////////
+// Button Scrolling
+
+btnScrollTo.addEventListener('click', function (e) {
+  // get the coords of where we are scrolling to
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
+
+  console.log('Current scroll (X/Y)', window.scrollX, scrollY);
+
+  console.log(
+    'height/width viewport',
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth
+  );
+
+  // Scrolling, need to pass the left and top of element to scrollto
+  // Should ensure to always add the current scroll position to make sure you are accounting for that
+  // window.scrollTo(s1coords.left + scrollX, s1coords.top + scrollY);
+
+  // Using this as an object we can do a nice smooth scroll effect
+  // window.scrollTo({
+  //   left: s1coords.left + scrollX,
+  //   top: s1coords.top + scrollY,
+  //   behavior: 'smooth',
+  // });
+
+  // More modern way using just an element and passing in the object
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+
+///////////////////////////////////////
+// Page Navigation
+
+// This creates a copy of the function for each element, instead we can use event delegation
+// Move the listener onto the parent container
+// document.querySelectorAll('.nav__link').forEach(function (el) {
+//   el.addEventListener('click', function (e) {
+//     e.preventDefault();
+//     console.log('LINK', e.target);
+//     // Grabs the href attribute which we can use to find the element
+//     const id = this.getAttribute('href');
+//     // console.log(id);
+//     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+//   });
+// });
+
+// Two steps are needed
+// 1. Add event listener to common parent element
+// 2. Determine which element originated the event, then work with that
+document.querySelector('.nav__links').addEventListener('click', function (el) {
+  el.preventDefault();
+  // Matching Strategy to ignore clicks not on the links
+  if (el.target.classList.contains('nav__link')) {
+    console.log('LINK', el.target);
+    const id = el.target.getAttribute('href');
+    console.log(id);
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
   }
 });
 
@@ -154,37 +217,6 @@ logo.classList.contains('test'); // not includes
 /* Styles Attributes and Classes */
 ///////////////////////////////////////
 
-const btnScrollTo = document.querySelector('.btn--scroll-to');
-const section1 = document.querySelector('#section--1');
-
-btnScrollTo.addEventListener('click', function (e) {
-  // get the coords of where we are scrolling to
-  const s1coords = section1.getBoundingClientRect();
-  console.log(s1coords);
-
-  console.log('Current scroll (X/Y)', window.scrollX, scrollY);
-
-  console.log(
-    'height/width viewport',
-    document.documentElement.clientHeight,
-    document.documentElement.clientWidth
-  );
-
-  // Scrolling, need to pass the left and top of element to scrollto
-  // Should ensure to always add the current scroll position to make sure you are accounting for that
-  // window.scrollTo(s1coords.left + scrollX, s1coords.top + scrollY);
-
-  // Using this as an object we can do a nice smooth scroll effect
-  // window.scrollTo({
-  //   left: s1coords.left + scrollX,
-  //   top: s1coords.top + scrollY,
-  //   behavior: 'smooth',
-  // });
-
-  // More modern way using just an element and passing in the object
-  section1.scrollIntoView({ behavior: 'smooth' });
-});
-
 // MouseEnter Event
 /*
 
@@ -214,6 +246,7 @@ setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
 Event Propogation in pratice
 */
 
+/*
 // Generate a random color in this format
 // rgb(255,255,255)
 const randomInt = (min, max) =>
@@ -248,3 +281,4 @@ document.querySelector('.nav').addEventListener(
   // Third parameter will define that they will happen on the capture phase (first) (defaults to false)
   // ,true
 );
+*/
