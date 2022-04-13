@@ -204,6 +204,36 @@ const headerObserver = new IntersectionObserver(
 headerObserver.observe(header);
 
 ///////////////////////////////////////
+// Revealing Elements on Scroll
+
+const revealSection = function (entries, observer) {
+  const [entry] = entries;
+  // console.log(entry);
+  if (!entry.isIntersecting) return;
+
+  entry.target.classList.remove('section--hidden');
+
+  // This stops monitoring them as they get revealed
+  observer.unobserve(entry.target);
+};
+
+const sectionObsOptions = {
+  root: null,
+  threshold: 0.2,
+};
+
+const sectionObserver = new IntersectionObserver(
+  revealSection,
+  sectionObsOptions
+);
+
+const allSections = document.querySelectorAll('.section');
+allSections.forEach(section => {
+  section.classList.add('section--hidden');
+  sectionObserver.observe(section);
+});
+
+///////////////////////////////////////
 /* Selecting Creating and Deleting Elements */
 ///////////////////////////////////////
 /*
