@@ -147,9 +147,23 @@ nav.addEventListener('mouseover', handleHover.bind(0.5));
 nav.addEventListener('mouseout', handleHover.bind(1));
 
 ///////////////////////////////////////
+// Sticky Animation
+// Scroll event fires very often, not very efficient
+// the event is not very useful, window.scrollY gets you the position
+const initialCoords = section1.getBoundingClientRect();
+console.log(initialCoords);
+
+window.addEventListener('scroll', function () {
+  console.log(window.scrollY);
+
+  if (window.scrollY > initialCoords.top) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
+});
+
+///////////////////////////////////////
 /* Selecting Creating and Deleting Elements */
 ///////////////////////////////////////
-
+/*
 // console.log(document.documentElement);
 // console.log(document.head);
 // console.log(document.body);
@@ -202,7 +216,7 @@ document.querySelector('.btn--close-cookie').addEventListener('click', () => {
   // legacy way to remove elements, you needed to invoke removeChild on the parent
   // message.parentElement.removeChild(message);
 });
-
+*/
 ///////////////////////////////////////
 /* Selecting Creating and Deleting Elements */
 ///////////////////////////////////////
