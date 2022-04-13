@@ -13,6 +13,7 @@ const tabs = document.querySelectorAll('.operations__tab');
 const tabsContainer = document.querySelector('.operations__tab-container');
 const tabsContent = document.querySelectorAll('.operations__content');
 const nav = document.querySelector('.nav');
+const header = document.querySelector('.header');
 
 const openModal = function (e) {
   e.preventDefault();
@@ -122,8 +123,6 @@ tabsContainer.addEventListener('click', function (el) {
 
 ///////////////////////////////////////
 // Menu fade animation
-console.log(nav);
-
 const handleHover = function (e) {
   const link = e.target;
 
@@ -147,9 +146,10 @@ nav.addEventListener('mouseover', handleHover.bind(0.5));
 nav.addEventListener('mouseout', handleHover.bind(1));
 
 ///////////////////////////////////////
-// Sticky Animation
+// Sticky Navigation - Scroll event
 // Scroll event fires very often, not very efficient
 // the event is not very useful, window.scrollY gets you the position
+/*
 const initialCoords = section1.getBoundingClientRect();
 console.log(initialCoords);
 
@@ -159,6 +159,49 @@ window.addEventListener('scroll', function () {
   if (window.scrollY > initialCoords.top) nav.classList.add('sticky');
   else nav.classList.remove('sticky');
 });
+*/
+
+///////////////////////////////////////
+// Sticky Navigation: Intersection Observer API
+// entries and the observer gets passed into the callback function
+// entries is the array of threshold
+/* 
+// sample exercise
+const obsCallback = function (entries, observer) {
+  entries.forEach(entry => {
+    console.log(entry);
+  });
+};
+
+const obsOptions = {
+  root: null, // when root is null it uses the viewport
+  threshold: [0, 0.2], // percentage of the element that we want intersecting
+};
+
+const observer = new IntersectionObserver(obsCallback, obsOptions);
+observer.observe(section1);
+*/
+
+const headerObsCallback = function (entries) {
+  const [entry] = entries;
+
+  if (!entry.isIntersecting) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
+};
+
+const navHeight = nav.getBoundingClientRect().height;
+
+const headerObsOptions = {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHeight}px`, // 90 pixels outside the header
+};
+
+const headerObserver = new IntersectionObserver(
+  headerObsCallback,
+  headerObsOptions
+);
+headerObserver.observe(header);
 
 ///////////////////////////////////////
 /* Selecting Creating and Deleting Elements */
