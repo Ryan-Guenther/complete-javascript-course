@@ -252,6 +252,7 @@ const loadImage = function (entries, observer) {
 const imageObsOptions = {
   root: null,
   threshold: 0,
+  rootMargin: '200px', // force it to load before reached
 };
 
 const imageObserver = new IntersectionObserver(loadImage, imageObsOptions);
