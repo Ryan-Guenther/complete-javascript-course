@@ -228,7 +228,8 @@ const sectionObserver = new IntersectionObserver(
 
 const allSections = document.querySelectorAll('.section');
 allSections.forEach(section => {
-  section.classList.add('section--hidden');
+  //TODO resolve bug where if your refresh while scrolled in it's not visible
+  //section.classList.add('section--hidden');
   sectionObserver.observe(section);
 });
 
@@ -261,6 +262,40 @@ const imageObserver = new IntersectionObserver(loadImage, imageObsOptions);
 const allLazyImages = document.querySelectorAll('img[data-src]');
 
 allLazyImages.forEach(image => imageObserver.observe(image));
+
+///////////////////////////////////////
+// Building a Slider Component
+const slides = document.querySelectorAll('.slide');
+const btnLeft = document.querySelector('.slider__btn--left');
+const btnRight = document.querySelector('.slider__btn--right');
+
+let currentSlide = 0;
+const maxSlide = slides.length;
+
+const goToSlide = function (targetSlide) {
+  // first slide at 0%, second at 100%,
+  slides.forEach(
+    (slide, index) =>
+      (slide.style.transform = `translateX(${100 * (index - targetSlide)}%)`)
+  );
+};
+
+const nextSlide = function () {
+  currentSlide++;
+  if (currentSlide === maxSlide) currentSlide = 0;
+  goToSlide(currentSlide);
+};
+
+const previousSlide = function () {
+  currentSlide--;
+  if (currentSlide < 0) currentSlide = maxSlide - 1;
+  goToSlide(currentSlide);
+};
+
+goToSlide(currentSlide);
+
+btnRight.addEventListener('click', nextSlide);
+btnLeft.addEventListener('click', previousSlide);
 
 ///////////////////////////////////////
 /* Selecting Creating and Deleting Elements */
