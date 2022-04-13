@@ -205,7 +205,6 @@ headerObserver.observe(header);
 
 ///////////////////////////////////////
 // Revealing Elements on Scroll
-
 const revealSection = function (entries, observer) {
   const [entry] = entries;
   // console.log(entry);
@@ -232,6 +231,35 @@ allSections.forEach(section => {
   section.classList.add('section--hidden');
   sectionObserver.observe(section);
 });
+
+///////////////////////////////////////
+// Lazy loading images
+const loadImage = function (entries, observer) {
+  const [entry] = entries;
+
+  if (!entry.isIntersecting) return;
+
+  entry.target.src = entry.target.dataset.src;
+
+  // want to wait to remove this till it loads to allow for network downlaod time
+  entry.target.addEventListener('load', function () {
+    entry.target.classList.remove('lazy-img');
+  });
+
+  observer.unobserve(entry.target);
+};
+
+const imageObsOptions = {
+  root: null,
+  threshold: 0,
+};
+
+const imageObserver = new IntersectionObserver(loadImage, imageObsOptions);
+
+// this way it only returns images that have the data-src attribute
+const allLazyImages = document.querySelectorAll('img[data-src]');
+
+allLazyImages.forEach(image => imageObserver.observe(image));
 
 ///////////////////////////////////////
 /* Selecting Creating and Deleting Elements */
